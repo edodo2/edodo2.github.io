@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/picture.css">
+
+  <title>Picture</title>
+</head>
+
+<body id="app">
+  <div class="text-center mx-auto w-25" :class="{'d-none': height > width}">
+    スマートフォン用QR、つけておきますね
+    <img src="../image/QR_542470.png" class="w-50 img-thumbnail">
+  </div>
+  <div :class="{'mx-auto card w-25': width > height}">
+    <div class="container">
+      <div class="row">
+        <div class="col-2" :class="{ 'pe-none' : (editting && !moCheck) || (editting && !hamme)}">
+          <img src="../image/camera.svg" id="camera" class="float-start w-75" @click="ca">
+        </div>
+        <div class="col"></div>
+        <div class="col-2" :class="{ 'pe-none' : editting}">
+          <img src="../image/three-dots-vertical.svg" id="dots" class="float-end w-75" @click="etc">
+        </div>
+      </div>
+      <div id="dataList" class="carousel carousel-dark slide h-75" data-bs-wrap="false" data-bs-ride="carousel"
+        data-bs-pause="false">
+        <div class="carousel-indicators" :class="{ 'd-none' : editting}">
+          <button type="button" data-bs-target="#dataList" data-bs-slide-to="0" class="active"
+            aria-current="true"></button>
+          <button type="button" data-bs-target="#dataList" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#dataList" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#dataList" data-bs-slide-to="3"></button>
+          <button type="button" :class="{ 'd-none' : !moCheck}" data-bs-target="#dataList"
+            data-bs-slide-to="4"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="3600000">
+            <img src="../image/su.svg" id="first" class="d-block w-100">
+            <div class="carousel-caption">
+              <h5>{{yokei}}●{{yokei}}{{yokei}}▲{{yokei}}■{{yokei}}{{yokei}}</h5>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3600000">
+            <div class="position-relative">
+              <img src="../image/u2.svg" class="d-block w-100 pe-none">
+              <img :src="pic2" @click="ham" :class="{ 'pe-none' : !(editting && hamme)}"
+                class="position-absolute mt-5 top-0 start-0 w-100">
+            </div>
+            <div class="carousel-caption">
+              <h5>☆{{yokei}}▽{{yokei}}{{yokei}}■</h5>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3600000">
+            <canvas id="second" class="d-block w-100" width="204" height="324"
+              :class="{ 'pe-none' : !(editting && erace)}"></canvas>
+            <div class="carousel-caption">
+              <h5>□{{yokei}}{{yokei}}◇■</h5>
+              <h5>{{yokei}}{{yokei}}×■</h5>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3600000">
+            <img src="../image/su4.svg" alt="青い花" class="d-block w-100">
+            <div class="carousel-caption">
+              <h5>{{hatena}}</h5>
+            </div>
+          </div>
+          <div class="carousel-item" :class="{ 'd-none' : !moCheck}">
+            <img src="../image/sulas.svg" alt="ラスト" class="d-block w-100">
+            <div class="carousel-caption">
+              <h5>★■▼</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev mt-5 mb-5" :class="{ 'd-none' : editting}" type="button"
+          data-bs-target="#dataList" data-bs-slide="prev">
+        </button>
+        <button class="carousel-control-next  mt-5 mb-5" :class="{ 'd-none' : editting}" type="button"
+          data-bs-target="#dataList" data-bs-slide="next">
+        </button>
+      </div>
+      <div class="row h-25">
+        <div class="col"></div>
+        <div class="col-2 text-center" @click="share" :class="{ 'd-none' : editting}">
+          <img src="../image/share.svg" id="share" class="w-75">
+          <p>共{{yokei}}有</p>
+        </div>
+        <div class="col" :class="{ 'd-none': editting}"></div>
+        <!-- <div class="col-2" :class="{ 'd-none': editting}"></div>
+        <div class="col" :class="{ 'd-none': editting}"></div> -->
+        <div class="col-2 text-center" @click="edit">
+          <img src="../image/sliders2.svg" id="edit" class="w-75">
+          <p>{{yokei}}編集{{yokei}}</p>
+        </div>
+        <div class="col" :class="{ 'd-none' : editting}"></div>
+        <div class="col-2 text-center" :class="{ 'd-none' : editting}" @click="tr">
+          <img src="../image/trash.svg" id="trash" class="w-75">
+          <p>削除</p>
+        </div>
+        <div class="btn-group col-4 mb-3" role="group" :class="{ 'd-none' : !editting}">
+          <input type="radio" class="btn-check" name="btnradio" value="eraser" id="btnradio1" autocomplete="off"
+            :cheked="erace">
+          <label class="btn btn-outline-secondary" for="btnradio1" @click="eraser"><img src="../image/eraser.svg"
+              class="w-100"></label>
+
+          <input type="radio" class="btn-check" name="btnradio" value="hammer" id="btnradio2" autocomplete="off"
+            :cheked="hamme">
+          <label class="btn btn-outline-secondary" for="btnradio2" @click="hammer"><img src="../image/hammer.svg"
+              class="w-100"></label>
+        </div>
+        <div class="col"></div>
+      </div>
+
+      <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom"
+        :class="{'mx-auto w-25': width > height}">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasBottomLabel">共有</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body container">
+          <div class="row text-center">
+            <div class="col">
+              <a href="https://twitter.com/intent/tweet?hashtags=Picture_nazo&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8EPicture%E3%80%8F&amp;url=https%3A%2F%2Fedodo2.web.fc2.com%2Fnew%2Fpicture%2Fstart.html"
+                tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/twblue.svg"
+                  class="w-50"></a>
+            </div>
+            <div class="col">
+              <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fedodo2.web.fc2.com%2Fnew%2Fpicture%2Fstart.html"
+                tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/LINE_APP_iOS.png"
+                  class="w-50"></a>
+            </div>
+            <div class="col">
+              <a href="http://www.facebook.com/share.php?u=https://edodo2.web.fc2.com/new/picture/start.html"
+                target="_blank" rel="noopener noreferrer"><img src="../image/facebook.svg" class="w-50"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">設{{yokei}}定</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <label class="form-label">タイ{{yokei}}ト{{yokei}}ル</label>
+            <input class="form-control pe-none" type="text" :value="mVa">
+            <div class="alert alert-danger" role="alert" :class="{ 'd-none' : !moFlag || moCheck}">
+              {{checkMes}}
+            </div>
+            <div class="alert alert-success" role="alert" :class="{ 'd-none' : !(moCheck || !moFlag)}">
+              設定済み
+            </div>
+            <div class="btn-group-vertical d-grid mt-2" :class="{ 'd-none' : !moFlag || moCheck}">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('□')">□</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('◇')">◇</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('▲')">▲</button>
+                <button type="button" class="btn btn-light btn-lg" @click="del"><img
+                    src="../image/backspace.svg"></button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('●')">●</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('■')">■</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('▼')">▼</button>
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('▽')">▽</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('☆')">☆</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('×')">×</button>
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondar pe-none btn-lg">　</button>
+                <button type="button" class="btn btn-secondar pe-none btn-lg">　</button>
+                <button type="button" class="btn btn-light btn-lg" @click="add('★')">★</button>
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+                <button type="button" class="btn btn-secondar btn-lg pe-none">　</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+              :class="{ 'd-none' : !(moCheck || !moFlag)}">OK</button>
+            <button type="button" class="btn btn-primary" @click="ch"
+              :class="{ 'd-none' : !moFlag || moCheck}">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="camodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog" :class="{'modal-fullscreen h-100': width < height}">
+        <div class="modal-content container">
+          <div class="position-relative  h-75">
+            <div class="w-100 h-100" :class="{'placeholder-glow':cng}">
+              <video id="video" class="w-100 h-100" :class="{'placeholder':cng}" :style="vs"></video>
+            </div>
+            <img src="../image/waku.svg" :class="{ 'd-none':!front}"
+              class="position-absolute mt-5 top-0 start-0 w-100 h-75">
+          </div>
+          <div class="row align-items-center bg-dark p-2">
+            <div class="col"></div>
+            <div class="col-2 text-center" @click="repeat">
+              <img src="../image/arrow-repeat.svg" class="w-100 img-thumbnail">
+            </div>
+            <div class="col"></div>
+            <div class="col-2"></div>
+            <div class="col"></div>
+            <div class="col-2 text-center bg-dark" @click="stop">
+              <img src="../image/su.svg" class="w-100 img-thumbnail">
+            </div>
+            <div class="col" :class="{ 'd-none' : editting}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen h-100">
+        <div class="modal-content container">
+          <div class="modal-header">
+            <h5 class="modal-title">Picture Clear!!</h5>
+          </div>
+          <div class="modal-body">
+            <p>おめでとうございます！</p>
+            <p>目ス(アイス、メス)がやりたかっただけなのにこんなことになってしまった</p>
+            <p>最後までお付き合いいただきありがとうございました</p>
+            <a class="btn btn-primary btn-lg m-2"
+              href="https://twitter.com/intent/tweet?hashtags=Picture_nazo&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8EPicture%E3%80%8F Clear!!&amp;url=https%3A%2F%2Fedodo2.web.fc2.com%2Fnew%2Fpicture%2Fstart.html"
+              tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                <path
+                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                </path>
+              </svg>クリアツイートする</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/vue.global.prod.js"></script>
+  <script src="../js/picture.js"></script>
+</body>
+
+</html>
