@@ -1,0 +1,12 @@
+.h-20 {
+    height: 20%!important;
+}
+.h-10 {
+    height: 10%!important;
+}
+.w-7-1 {
+    width: calc(100%/7)!important;
+}
+.w-8-1 {
+    width: calc(100%/8)!important;
+}
