@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/calendar.css">
+
+  <title>Calendar</title>
+</head>
+
+<body id="app" style="height:100vh">
+  <div :class="{'d-none': load}">
+    なうろーでぃんぐ
+  </div>
+  <div class="d-none h-100" id="loading">
+    <div class="text-center mx-auto w-25" :class="{'d-none': height > width}">
+      スマートフォン用QR、つけておきますね
+      <img src="../image/QR_471232.png" class="w-25 img-thumbnail">
+    </div>
+    <div class="h-100" :class="{'mx-auto w-25 card': width > height}">
+      <div class="container h-100">
+        <div class="h-100" :class="{'d-none': !home}">
+          <card></card>
+          <div class="h-25"></div>
+          <div class="h-25" :class="{'mx-auto': width > height}">
+            <div class="row text-center p-3">
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col">
+                <img src="../image/ca/calendar-week.svg" class="w-75" @click="cal">
+              </div>
+              <div class="col">
+                <img src="../image/ca/file-earmark-text.svg" class="w-75" @click="mem">
+              </div>
+            </div>
+            <div class="row text-center p-3">
+              <div class="col">
+                <a href="https://twitter.com/intent/tweet?hashtags=Calendar_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8ECalendar%E3%80%8F&amp;url=https%3A%2F%2Fedodo2.github.io%2Fcalendar%2Fstart.html"
+                  tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/twblue.svg"
+                    class="w-75"></a>
+              </div>
+              <div class="col">
+                <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fedodo2.github.io%2Fcalendar%2Fstart.html"
+                  tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/LINE_APP_iOS.png"
+                    class="w-75"></a>
+              </div>
+              <div class="col">
+                <a href="http://www.facebook.com/share.php?u=https://edodo2.github.io/new/calendar/start.html"
+                  target="_blank" rel="noopener noreferrer"><img src="../image/facebook.svg" class="w-75"></a>
+              </div>
+              <div class="col">
+                <a href="https://edodo2.github.io/picture/" target="_blank" rel="noopener noreferrer">
+                  <img src="../image/ca/images.svg" class="w-75">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="h-25">
+            <div class="h-25">
+              <div class="input-group mx-auto w-75">
+                <input type="text" class="form-control" aria-describedby="button-addon2" v-model="search">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="sea"><img
+                    src="../image/ca/search.svg"></button>
+              </div>
+            </div>
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+
+        <div class="h-100" :class="{'d-none': !calendar}">
+          <div class="h-75">
+            <div class="row">
+              <div class="col-2">
+                <img src="../image/ca/list.svg" class="float-start w-75" @click="came">
+              </div>
+              <div class="col">{{caltitle}}月</div>
+              <div class="col-2">
+                <img src="../image/ca/person-fill.svg" class="float-end w-75" @click="person">
+              </div>
+            </div>
+            <div id="dataList" class="carousel carousel-dark slide h-100 text-center" data-bs-wrap="false"
+              data-bs-ride="carousel" data-bs-pause="false">
+              <div class="carousel-item h-100 active" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>1</days>
+                  <div class="row h-20">
+                    <task day="1" :a="a?'2023':false" :b="b?'寝':false" :c="c?'HNY':false" :d="d?'2023':false"></task>
+                    <task day="2" :b="b?'返信':false" :c="c?'箱根':false"></task>
+                    <task day="3" :c="c?'駅伝':false"></task>
+                    <task day="4" :a="a?'a':false"></task>
+                    <task day="5" :a="a?'i':false"></task>
+                    <task day="6"></task>
+                    <task day="7" :b="b?'夜行':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="8"></task>
+                    <task day="9" :c="c?'d':false" :b="b?'出社':false"></task>
+                    <task day="10" :c="c?'o':false" :a="a?'ね':false"></task>
+                    <task day="11" :c="c?'g':false" :a="a?'こ':false"></task>
+                    <task day="12" :b="b?'カ':false"></task>
+                    <task day="13" :b="b?'フ':false"></task>
+                    <task day="14" :b="b?'ェ':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="15" :c="c?'スキー':false"></task>
+                    <task day="16" :b="b?'出社':false" :a="a?'仕事':false"></task>
+                    <task day="17"></task>
+                    <task day="18" :b="b ? 'ゆ':false"></task>
+                    <task day="19" :c="c?'め':false"></task>
+                    <task day="20"></task>
+                    <task day="21" :c="c?'妙高':false" :a="a?'休み':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="22" :c="c?'菅平':false"></task>
+                    <task day="23" :b="b?'予約':false"></task>
+                    <task day="24" :a="a ? '誕生日':false" :d="d ? 'arrow' : false"></task>
+                    <task day="25" :b="b ? 'き':false" :c="c?'お':false" :d="d?'く':false"></task>
+                    <task day="26" :b="b?'(2)':false"></task>
+                    <task day="27" :c="c?'p':false"></task>
+                    <task day="28" :c="c?'a':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="29" :c="c?'n':false"></task>
+                    <task day="30" :b="b?'出社':false"></task>
+                    <task day="31" :a="a?'飯':false" :d="d?'ご飯':false" :b="b?'ご飯':false"></task>
+                    <task day="1" out="true"></task>
+                    <task day="2" :c="c?'寿司':false" out="true"></task>
+                    <task day="3" :a="a?'有給':false" :d="d?'ご飯':false" out="true"></task>
+                    <task day="4" :a="a?'休出':false" out="true"></task>
+                  </div>
+                </div>
+
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>2</days>
+                  <div class="row h-20">
+                    <task day="29" :c="c?'n':false" out="true"></task>
+                    <task day="30" :b="b?'出社':false" out="true"></task>
+                    <task day="31" :a="a?'飯':false" :d="d?'ご飯':false" out="true"></task>
+                    <task day="1"></task>
+                    <task day="2" :c="c?'寿司':false"></task>
+                    <task day="3" :a="a?'有給':false" :d="d?'ご飯':false"></task>
+                    <task day="4" :a="a?'休出':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="5" :a="a?'n':false"></task>
+                    <task day="6" :a="a?'e':false"></task>
+                    <task day="7" :a="a?'w':false"></task>
+                    <task day="8"></task>
+                    <task day="9" :c="c?'寿司':false"></task>
+                    <task day="10"></task>
+                    <task day="11"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="12"></task>
+                    <task day="13" :b="b?'出社':false" :a="a?'代休':false" :d="d?'買物':false"></task>
+                    <task day="14"></task>
+                    <task day="15"></task>
+                    <task day="16" :c="c?'寿司':false"></task>
+                    <task day="17" :a="a?'お':false"></task>
+                    <task day="18" :a="a?'も':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="19" :a="a?'に':false"></task>
+                    <task day="20" :b="b?'出社':false" :a="a?'お':false"></task>
+                    <task day="21" :a="a?'も':false"></task>
+                    <task day="22" :a="a?'ち':false"></task>
+                    <task day="23" :c="c?'寿司':false" :a="a?'を':false" :d="d?'餅':false"></task>
+                    <task day="24" :a="a?'も':false"></task>
+                    <task day="25" :b="b?'餅':false" :a="a?'つ':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="26"></task>
+                    <task day="27" :b="b?'有給':false"></task>
+                    <task day="28"></task>
+                    <task day="1" :a="a?'購入':false" out="true"></task>
+                    <task day="2" :c="c?'シ':false" :b="b?'ユ':false" out="true"></task>
+                    <task day="3" out="true"></task>
+                    <task day="4" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>3</days>
+                  <div class="row h-20">
+                    <task day="26" out="true"></task>
+                    <task day="27" :b="b?'有給':false" out="true"></task>
+                    <task day="28" out="true"></task>
+                    <task day="1" :a="a?'購入':false"></task>
+                    <task day="2" :c="c?'シ':false" :b="b?'ユ':false"></task>
+                    <task day="3" :a="a?'f':false"></task>
+                    <task day="4" :a="a?'i':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="5" :a="a?'t':false"></task>
+                    <task day="6" :c="c?'蕎麦':false"></task>
+                    <task day="7"></task>
+                    <task day="8" :a="a?'予約':false"></task>
+                    <task day="9" :b="b ? 'キ': false" :c="c ? 'ン': false" :d="d ? 'サ': false"></task>
+                    <task day="10" :a="a ? 'arrow': false" :d="d ? '誕生日': false"></task>
+                    <task day="11" :a="a?'休出':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="12" :a="a?'休出':false"></task>
+                    <task day="13" :c="c?'蕎麦':false"></task>
+                    <task day="14"></task>
+                    <task day="15"></task>
+                    <task day="16" :c="c?'パ':false" :b="b ? 'マ': false"></task>
+                    <task day="17"></task>
+                    <task day="18" :a="a?'休出':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="19"></task>
+                    <task day="20" :c="c?'蕎麦':false"></task>
+                    <task day="21"></task>
+                    <task day="22"></task>
+                    <task day="23" :c="c?'イ':false" :b="b ? 'ツ': false"></task>
+                    <task day="24"></task>
+                    <task day="25"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="26" :c="c?'(3)':false"></task>
+                    <task day="27" :a="a?'代休':false" :d="d?'ご飯':false"></task>
+                    <task day="28"></task>
+                    <task day="29" :c="c?'蕎麦':false"></task>
+                    <task day="30" :b="b ? 'リ': false"></task>
+                    <task day="31"></task>
+                    <task day="1" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>4</days>
+                  <div class="row h-20">
+                    <task day="26" :c="c?'(3)':false" out="true"></task>
+                    <task day="27" :a="a?'代休':false" :d="d?'ご飯':false" out="true"></task>
+                    <task day="28" out="true"></task>
+                    <task day="29" :c="c?'蕎麦':false" out="true"></task>
+                    <task day="30" :b="b ? 'リ': false" out="true"></task>
+                    <task day="31" out="true"></task>
+                    <task day="1"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="2"></task>
+                    <task day="3" :b="b ? '出社': false" :a="a?'f':false"></task>
+                    <task day="4" :a="a?'e':false"></task>
+                    <task day="5" :a="a?'e':false"></task>
+                    <task day="6" :a="a?'l':false"></task>
+                    <task day="7" :a="a?'i':false"></task>
+                    <task day="8" :c="c?'USJ':false" :b="b ? 'USJ': false" :a="a?'n':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="9" :c="c?'USJ':false" :b="b ? 'USJ': false" :a="a?'g':false"></task>
+                    <task day="10"></task>
+                    <task day="11" :a="a?'代休?':false" :b="b ? '飯?': false" :d="d?'買物':false"></task>
+                    <task day="12" :c="c?'ケーキ':false" :a="a?'代休?':false" :b="b ? '飯?': false"></task>
+                    <task day="13" :c="c?'ハピバ':false"></task>
+                    <task day="14" :c="c?'ケーキ':false"></task>
+                    <task day="15" :b="b ? 'TDL': false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="16" :c="c?'ライブ':false"></task>
+                    <task day="17" :a="a?'ぷ':false"></task>
+                    <task day="18" :a="a?'ら':false"></task>
+                    <task day="19" :a="a?'す':false"></task>
+                    <task day="20" :b="b ? 'ル': false"></task>
+                    <task day="21" :b="b ? 'ー': false"></task>
+                    <task day="22" :c="c?'ライブ':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="23" :c="c?'ライブ':false"></task>
+                    <task day="24"></task>
+                    <task day="25"></task>
+                    <task day="26" :c="c?'ライブ':false" :b="b ? 'な': false" :a="a?'ラ':false"></task>
+                    <task day="27" :b="b ? 'ん': false" :a="a?'プ':false"></task>
+                    <task day="28" :b="b ? 'そ': false" :a="a?'ラ':false"></task>
+                    <task day="29" :b="b ? 'れ': false" :a="a?'ス':false"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>5</days>
+                  <div class="row h-20">
+                    <task day="30" :c="c?'ライブ':false" :b="b ? '山': false" :a="a?'休出':false" out="true"></task>
+                    <task day="1" :b="b ? '出社': false"></task>
+                    <task day="2"></task>
+                    <task day="3"></task>
+                    <task day="4" :c="c?'シド':false"></task>
+                    <task day="5" :a="a?'l':false"></task>
+                    <task day="6" :a="a?'i':false"></task>
+                  </div>
+                  <div class="row h-20">
+
+                    <task day="7" :a="a?'e':false"></task>
+                    <task day="8" :b="b ? '出社': false"></task>
+                    <task day="9"></task>
+                    <task day="10" :c="c?'寿司':false"></task>
+                    <task day="11"></task>
+                    <task day="12" :b="b ? '出社': false"></task>
+                    <task day="13"></task>
+                  </div>
+                  <div class="row h-20">
+
+                    <task day="14"></task>
+                    <task day="15" :b="b ? '出社': false"></task>
+                    <task day="16" :b="b ? '出社': false"></task>
+                    <task day="17" :c="c?'寿司':false" :b="b ? '出社': false"></task>
+                    <task day="18"></task>
+                    <task day="19"></task>
+                    <task day="20" :b="b ? '山': false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="21"></task>
+                    <task day="22" :b="b ? '出社': false"></task>
+                    <task day="23"></task>
+                    <task day="24" :c="c?'寿司':false"></task>
+                    <task day="25"></task>
+                    <task day="26"></task>
+                    <task day="27"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="28"></task>
+                    <task day="29" :b="b ? '出社': false"></task>
+                    <task day="30"></task>
+                    <task day="31" :c="c?'寿司':false"></task>
+                    <task day="1" :a="a?'代休':false" :d="d?'ご飯':false" out="true"></task>
+                    <task day="2" out="true"></task>
+                    <task day="3" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>6</days>
+                  <div class="row h-20">
+                    <task day="28" out="true"></task>
+                    <task day="29" :b="b ? '出社': false" out="true"></task>
+                    <task day="30" out="true"></task>
+                    <task day="31" :c="c?'寿司':false" out="true"></task>
+                    <task day="1" :a="a?'代休':false" :d="d?'ご飯':false"></task>
+                    <task day="2"></task>
+                    <task day="3"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="4"></task>
+                    <task day="5" :a="a?'l':false"></task>
+                    <task day="6" :c="c?'映画':false" :a="a?'i':false"></task>
+                    <task day="7" :c="c?'映画':false" :a="a?'n':false"></task>
+                    <task day="8" :a="a?'k':false"></task>
+                    <task day="9"></task>
+                    <task day="10" :c="c?'映画':false" :b="b ? 'USJ': false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="11" :b="b ? 'USJ': false" :a="a?'休出?':false"></task>
+                    <task day="12" :b="b ? 'USJ': false"></task>
+                    <task day="13"></task>
+                    <task day="14" :c="c?'映画':false"></task>
+                    <task day="15" :c="c?'蕎麦':false"></task>
+                    <task day="16"></task>
+                    <task day="17" :a="a?'休出?':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="18" :a="a?'休出?':false"></task>
+                    <task day="19"></task>
+                    <task day="20" :b="b ? '出社': false"></task>
+                    <task day="21"></task>
+                    <task day="22" :c="c?'蕎麦':false"></task>
+                    <task day="23"></task>
+                    <task day="24" :a="a?'休出?':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="25" :a="a?'休出?':false"></task>
+                    <task day="26"></task>
+                    <task day="27"></task>
+                    <task day="28" :c="c?'蕎麦':false"></task>
+                    <task day="29"></task>
+                    <task day="30" :b="b ? '検収': false" :a="a?'納期':false"></task>
+                    <task day="1" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>7</days>
+                  <div class="row h-20">
+                    <task day="25" :a="a?'休出?':false" out="true"></task>
+                    <task day="26" out="true"></task>
+                    <task day="27" out="true"></task>
+                    <task day="28" :c="c?'蕎麦':false" out="true"></task>
+                    <task day="29" out="true"></task>
+                    <task day="30" :b="b ? '検収': false" :a="a?'納期':false" out="true"></task>
+                    <task day="1"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="2" :c="c?'ライブ':false"></task>
+                    <task day="3" :a="a?'s':false"></task>
+                    <task day="4" :a="a?'w':false"></task>
+                    <task day="5" :a="a?'i':false"></task>
+                    <task day="6" :a="a?'m':false"></task>
+                    <task day="7" :c="c?'砂塵':false" :a="a?'m':false"></task>
+                    <task day="8" :a="a?'i':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="9" :a="a?'n':false"></task>
+                    <task day="10" :c="c?'迷宮':false" :a="a?'g':false"></task>
+                    <task day="11" :b="b ? '出社': false" :a="a?'寝':false"></task>
+                    <task day="12" :a="a?'寝':false"></task>
+                    <task day="13" :a="a?'寝':false"></task>
+                    <task day="14" :c="c?'寿司':false" :a="a?'寝':false"></task>
+                    <task day="15" :a="a?'寝':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="16" :a="a?'寝':false"></task>
+                    <task day="17" :b="b ? '出社': false" :a="a?'寝':false"></task>
+                    <task day="18" :c="c?'診断':false"></task>
+                    <task day="19"></task>
+                    <task day="20"></task>
+                    <task day="21" :a="a?'最終':false" :b="b ? '呑?': false"></task>
+                    <task day="22" :c="c?'USJ':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="23" :c="c?'USJ':false"></task>
+                    <task day="24" :a="a?'有給':false"></task>
+                    <task day="25" :a="a?'有給':false"></task>
+                    <task day="26" :a="a?'有給':false"></task>
+                    <task day="27" :a="a?'有給':false"></task>
+                    <task day="28" :c="c?'箱根':false" :b="b ? '準備': false" :a="a?'有給':false"></task>
+                    <task day="29" :c="c?'箱根':false"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>8</days>
+                  <div class="row h-20">
+                    <task day="30" :c="c?'箱根':false" out="true"></task>
+                    <task day="31" :c="c?'箱根':false" :a="a?'有給':false" out="true"></task>
+                    <task day="1" :c="c?'箱根':false" :a="a?'入社':false" :b="b ? '書類': false"></task>
+                    <task day="2"></task>
+                    <task day="3" :b="b ? '保険': false"></task>
+                    <task day="4" :c="c?'草津':false"></task>
+                    <task day="5" :a="a?'g':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="6" :a="a?'o':false"></task>
+                    <task day="7" :a="a?'o':false"></task>
+                    <task day="8" :a="a?'d':false"></task>
+                    <task day="9" :c="c?'下呂':false"></task>
+                    <task day="10" :c="c?'下呂':false"></task>
+                    <task day="11" :a="a?'歓迎会':false" :b="b ? '歓迎会': false"></task>
+                    <task day="12"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="13"></task>
+                    <task day="14" :a="a?'歓迎会':false" :b="b ? '出社': false"></task>
+                    <task day="15"></task>
+                    <task day="16"></task>
+                    <task day="17"></task>
+                    <task day="18" :a="a?'歓迎会':false"></task>
+                    <task day="19"></task>
+                  </div>
+                  <div class="row h-20">
+
+                    <task day="20" :c="c?'す':false" :a="a?'し':false"></task>
+                    <task day="21" :c="c?'し':false" :a="a?'ん':false"></task>
+                    <task day="22" :c="c?'ざ':false" :a="a?'て':false"></task>
+                    <task day="23" :c="c?'ん':false" :a="a?'ん':false"></task>
+                    <task day="24" :c="c?'ま':false" :a="a?'ち':false"></task>
+                    <task day="25" :c="c?'い':false"></task>
+                    <task day="26"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="27"></task>
+                    <task day="28" :c="c?'総会':false"></task>
+                    <task day="29"></task>
+                    <task day="30"></task>
+                    <task day="31" :a="a?'面談':false" :b="b?'面談':false"></task>
+                    <task day="1" :a="a?'t':false" out="true"></task>
+                    <task day="2" :a="a?'h':false" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>9</days>
+                  <div class="row h-20">
+                    <task day="27" out="true"></task>
+                    <task day="28" :c="c?'総会':false" out="true"></task>
+                    <task day="29" out="true"></task>
+                    <task day="30" out="true"></task>
+                    <task day="31" :a="a?'面談':false" :b="b?'面談':false" out="true"></task>
+                    <task day="1" :a="a?'t':false"></task>
+                    <task day="2" :a="a?'h':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="3" :a="a?'r':false"></task>
+                    <task day="4" :a="a?'e':false"></task>
+                    <task day="5" :a="a?'e':false"></task>
+                    <task day="6"></task>
+                    <task day="7" :c="c?'青':false"></task>
+                    <task day="8" :c="c?'山':false"></task>></task>
+                    <task day="9" :c="c?'テ':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="10" :c="c?'ル':false"></task>
+                    <task day="11" :c="c?'マ':false"></task>
+                    <task day="12" :b="b?'く':false"></task>
+                    <task day="13"></task>
+                    <task day="14"></task>
+                    <task day="15" :c="c?'手紙':false"></task>
+                    <task day="16"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="17"></task>
+                    <task day="18" :a="a?'し':false"></task>
+                    <task day="19" :a="a?'お':false" :b="b?'さ':false" :d="d?'け':false"></task>
+                    <task day="20" :c="c?'arrow':false"></task>
+                    <task day="21" :a="a?'え':false"></task>
+                    <task day="22" :a="a?'が':false"></task>
+                    <task day="23" :a="a?'お':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="24" :c="c?'配当':false"></task>
+                    <task day="25"></task>
+                    <task day="26" :b="b?'つ':false"></task>
+                    <task day="27" :a="a?'ピ':false"></task>
+                    <task day="28" :a="a?'ッ':false"></task>
+                    <task day="29" :a="a?'タ':false"></task>
+                    <task day="30" :a="a?'リ':false"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>10</days>
+                  <div class="row h-20">
+                    <task day="1" :c="c?'銀行':false"></task>
+                    <task day="2" :b="b?'出社':false"></task>
+                    <task day="3"></task>
+                    <task day="4" :a="a?'a':false"></task>
+                    <task day="5" :a="a?'n':false"></task>
+                    <task day="6" :a="a?'t':false"></task>
+                    <task day="7" :c="c?'富士急':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="8" :a="a?'富士急':false"></task>
+                    <task day="9"></task>
+                    <task day="10" :b="b?'出社':false"></task>
+                    <task day="11" :c="c?'映画':false"></task>
+                    <task day="12" :c="c?'蕎麦':false"></task>
+                    <task day="13"></task>
+                    <task day="14" :a="a?'富士急':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="15" :a="a?'富士急':false"></task>
+                    <task day="16" :b="b?'目標':false"></task>
+                    <task day="17"></task>
+                    <task day="18"></task>
+                    <task day="19" :c="c?'蕎麦':false"></task>
+                    <task day="20"></task>
+                    <task day="21" :a="a?'富士急':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="22" :a="a?'富士急':false"></task>
+                    <task day="23" :c="c?'蕎麦':false" :b="b?'出社':false"></task>
+                    <task day="24" :c="c?'寿司':false"></task>
+                    <task day="25"></task>
+                    <task day="26" :c="c?'(1)':false"></task>
+                    <task day="27"></task>
+                    <task day="28" :c="c?'箱根':false" :a="a?'富士急':false" :b="b?'富士急':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="29" :c="c?'箱根':false" :a="a?'富士急':false" :b="b?'富士急':false"></task>
+                    <task day="30" :c="c?'箱根':false"></task>
+                    <task day="31" :c="c?'箱根':false"></task>
+                    <task day="1" :c="c?'箱根':false" out="true"></task>
+                    <task day="2" out="true"></task>
+                    <task day="3" out="true"></task>
+                    <task day="4" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>11</days>
+                  <div class="row h-20">
+                    <task day="29" :c="c?'箱根':false" :a="a?'富士急':false" :b="b?'富士急':false" out="true"></task>
+                    <task day="30" :c="c?'箱根':false" out="true"></task>
+                    <task day="31" :c="c?'箱根':false" out="true"></task>
+                    <task day="1" :c="c?'箱根':false"></task>
+                    <task day="2"></task>
+                    <task day="3"></task>
+                    <task day="4"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="5" :a="a?'c':false"></task>
+                    <task day="6" :a="a?'u':false"></task>
+                    <task day="7" :a="a?'t':false"></task>
+                    <task day="8" :a="a?'e':false"></task>
+                    <task day="9"></task>
+                    <task day="10"></task>
+                    <task day="11" :b="b?'釣り':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="12" :b="b?'BBQ':false" :a="a?'富士急':false"></task>
+                    <task day="13" :b="b?'出社':false" :a="a?'富士急':false"></task>
+                    <task day="14" :a="a?'富士急':false"></task>
+                    <task day="15" :a="a?'富士急':false"></task>
+                    <task day="16" :a="a?'富士急':false"></task>
+                    <task day="17" :a="a?'富士急':false"></task>
+                    <task day="18" :a="a?'富士急':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="19"></task>
+                    <task day="20" :c="c?'熱海':false" :b="b?'接待':false"></task>
+                    <task day="21"></task>
+                    <task day="22"></task>
+                    <task day="23" :c="c?'書類':false"></task>
+                    <task day="24"></task>
+                    <task day="25" :a="a?'ゴルフ':false" :b="b?'ゴルフ':false"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="26" :b="b?'(4)':false"></task>
+                    <task day="27" :b="b?'有給':false"></task>
+                    <task day="28"></task>
+                    <task day="29"></task>
+                    <task day="30"></task>
+                    <task day="1" :a="a?'予約':false" out="true"></task>
+                    <task day="2" out="true"></task>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item h-100" data-bs-interval="3600000">
+                <div class="h-100 w-100">
+                  <days>12</days>
+                  <div class="row h-20">
+                    <task day="26" :b="b?'(4)':false" out="true"></task>
+                    <task day="27" :b="b?'有給':false" out="true"></task>
+                    <task day="28" out="true"></task>
+                    <task day="29" out="true"></task>
+                    <task day="30" out="true"></task>
+                    <task day="1" :a="a?'予約':false"></task>
+                    <task day="2"></task>
+                  </div>
+                  <div class="row h-20">
+                    <task day="3"></task>
+                    <task day="4" :a="a?'i':false"></task>
+                    <task day="5" :a="a?'e':false"></task>
+                    <task day="6" :c="c?'寿司':false" :a="a?'撲':false"></task>
+                    <task day="7" :a="a?'滅':false"></task>
+                    <task day="8" :b="b?'有給':false"></task>
+                    <task day="9" :b="b?'スキー':false"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="10"></task>
+                    <task day="11" :b="b?'有給':false" :a="a?'る':false"></task>
+                    <task day="12" :b="b?'arrow':false"></task>
+                    <task day="13" :a="a?'ん':false" :c="c?'イ':false"></task>
+                    <task day="14" :c="c?'寿司':false"></task>
+                    <task day="15" :a="a?'ば':false"></task>
+                    <task day="16"></task>
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="17"></task>
+                    <task day="18" :b="b?'有給':false"></task>
+                    <task day="19" :b="b?'有給':false"></task>
+                    <task day="20" :b="b?'有給':false"></task>
+                    <task day="21" :c="c?'蕎麦':false"></task>
+                    <task day="22"></task>
+                    <task day="23" :a="a?'散髪':false"></task>
+
+
+                  </div>
+                  <div class="row h-20">
+                    <task day="24" :a="a?'飯':false" :d="d?'ご飯':false"></task>
+                    <task day="25"></task>
+                    <task day="26" :c="c?'会席':false"></task>
+                    <task day="27" :b="b?'有給':false"></task>
+                    <task day="28" :b="b?'有給':false"></task>
+                    <task day="29" :b="b?'有給':false"></task>
+                    <task day="30" :a="a?'帰省':false"></task>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="h-25">
+            <div class="h-25">
+            </div>
+            <house @hom="hom" c="true" :n="caltitle < 12" :p="caltitle > 1"></house>
+          </div>
+
+          <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasC">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Calendar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body mb-3">
+              <div class="form-check" :class="{'d-none': !aa}">
+                <input class="form-check-input" type="checkbox" value="" v-model="a">
+                a@example.com
+              </div>
+              <div class="form-check" :class="{'d-none': !bb}">
+                <input class="form-check-input" type="checkbox" value="" v-model="b">
+                b@example.com
+              </div>
+              <div class="form-check" :class="{'d-none': !cc}">
+                <input class="form-check-input" type="checkbox" value="" v-model="c">
+                c@example.com
+              </div>
+              <div class="form-check" :class="{'d-none': !dd}">
+                <input class="form-check-input" type="checkbox" value="" v-model="d">
+                d@example.com
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Users</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <div :class="{'d-none': !aa}">
+                    a@example.com
+                  </div>
+                  <div :class="{'d-none': !bb}">
+                    b@example.com
+                  </div>
+                  <div :class="{'d-none': !cc}">
+                    c@example.com
+                  </div>
+                  <div :class="{'d-none': !dd}">
+                    d@example.com
+                  </div>
+                </div>
+                <div class="modal-footer">
+
+                  <div :class="{'d-none': aa && bb && cc && dd}">
+                    <img src="../image/ca/person-fill-add.svg">
+                    <label class="form-label">ID</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" v-model="id">
+                      <span class="input-group-text" id="basic-addon2">@example.com</span>
+                    </div>
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" v-model="pass">
+                    <button type="submit" class="btn btn-primary" @click="signin">Sign in</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-100" :class="{'d-none': !memo}">
+          <div class="h-75 w-100 overflow-auto">
+            <div class="row w-100">
+              <div class="w-50">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">パスワードの取り扱いは慎重に、メモ帳にそのまま書いたりしているこの状態は褒められたものじゃない</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">別タブとか別アプリが開いた先は謎に関係ない</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">b@example.com</p>
+                    <p class="card-text">いつかよむ</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">ベーグル</p>
+                    <p class="card-text">トマト</p>
+                    <p class="card-text">パプリカ</p>
+                    <p class="card-text">オニオン</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">d@example.com</p>
+                    <p class="card-text">(1)(2)(3)(4)</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">あきらめない</p>
+                  </div>
+                </div>
+              </div>
+              <div class="w-50">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">パスワードは半角英小文字しか使わない</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">a@example.com</p>
+                    <p class="card-text">pass</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">たまご</p>
+                    <p class="card-text">牛乳</p>
+                    <p class="card-text">大根</p>
+                    <p class="card-text">ねぎ</p>
+                    <p class="card-text">しらたき</p>
+                    <p class="card-text">ちくわ</p>
+                    <p class="card-text">アルミホイル</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">c@example.com</p>
+                    <p class="card-text">3件</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">実装が大変</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">いつかきっとよめる</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">クリア方法</p>
+                    <p class="card-text">a d <img src="../image/ca/arrow-left.svg"></p>
+                    <p class="card-text">b c <img src="../image/ca/arrow-right.svg"></p>
+                    <p class="card-text">c d <img src="../image/ca/arrow-left.svg"></p>
+                    <p class="card-text">a b <img src="../image/ca/arrow-right.svg"></p>
+                    <p class="card-text">b c <img src="../image/ca/arrow-left.svg"></p>
+                    <p class="card-text">a c d <img src="../image/ca/arrow-right.svg"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <div class="h-25">
+            </div>
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" :class="{'d-none': !se}">
+          <div class="h-25">
+            <div class="h-25"></div>
+            <div class="input-group mx-auto w-75">
+              <input type="text" class="form-control" aria-describedby="button-addon2" v-model="search">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="sea"><img
+                  src="../image/ca/search.svg"></button>
+            </div>
+            <div class="h-25">
+              <div class="mx-auto w-75">
+                検索結果:{{scount}}件
+              </div>
+            </div>
+          </div>
+          <div class="h-25 row row-cols-4 text-center p-3">
+            <div class="col-3 h-50" :class="{'d-none': !calenda}">
+              <img src="../image/ca/calendar-week.svg" class="w-75" @click="cal">
+            </div>
+            <div class="col-3 h-50" :class="{'d-none': !memoo}">
+              <img src="../image/ca/file-earmark-text.svg" class="w-75" @click="mem">
+            </div>
+            <div class="col-3 h-50" :class="{'d-none': !twitter}">
+              <a href="https://twitter.com/intent/tweet?hashtags=Calendar_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8ECalendar%E3%80%8F&amp;url=https%3A%2F%2Fedodo2.github.io%2Fcalendar%2Fstart.html"
+                tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/twblue.svg"
+                  class="w-75"></a>
+            </div>
+            <div class="col-3 h-50" :class="{'d-none': !line}">
+              <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fedodo2.github.io%2Fcalendar%2Fstart.html"
+                tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><img src="../image/LINE_APP_iOS.png"
+                  class="w-75"></a>
+            </div>
+            <div class="col-3 h-50" :class="{'d-none': !facebook}">
+              <a href="http://www.facebook.com/share.php?u=https://edodo2.github.io/new/calendar/start.html"
+                target="_blank" rel="noopener noreferrer"><img src="../image/facebook.svg" class="w-75"></a>
+            </div>
+            <div class="col-3 h-50" :class="{'d-none': !picture}">
+              <a href="https://edodo2.github.io/picture/" target="_blank" rel="noopener noreferrer">
+                <img src="../image/ca/images.svg" class="w-75">
+              </a>
+            </div>
+          </div>
+          <div class="h-25 text-center">{{comm}}</div>
+          <div class="h-25">
+            <div class="h-25">
+            </div>
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+
+
+
+        <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+          <div class="modal-dialog modal-fullscreen h-100">
+            <div class="modal-content container">
+              <div class="modal-header">
+                <h5 class="modal-title">Calendar Clear!!</h5>
+              </div>
+              <div class="modal-body">
+                <p>おめでとうございます！</p>
+                <p>この画面が出たということは、私、実装を終えたんですね。</p>
+                <p>Diceで楽した実装をこれで取り返そうと思って。。。</p>
+                <p>最後までお付き合いいただきありがとうございました</p>
+                <a class="btn btn-primary btn-lg m-3"
+                  href="https://twitter.com/intent/tweet?hashtags=Calendar_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8ECalendar%E3%80%8F Clear!!&amp;url=https%3A%2F%2Fedodo2.github.io%2Fcalendar%2Fstart.html"
+                  tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                    <path
+                      d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                    </path>
+                  </svg>クリアツイートする</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/vue.global.prod.js"></script>
+  <script src="../js/calendar.js"></script>
+</body>
+
+</html>
