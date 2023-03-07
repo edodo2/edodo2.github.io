@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+  <title>Applications</title>
+</head>
+
+<body id="app" style="height:100vh">
+  <div v-if="!load">
+    なうろーでぃんぐ
+  </div>
+  <div class="d-none h-100" id="loading">
+    <div class="text-center mx-auto w-25" v-if="height < width">
+      スマートフォン用QR、つけておきますね
+      <img src="../image/QR_APP.png" class="w-25 img-thumbnail">
+    </div>
+    <div class="h-100" :class="{'mx-auto w-25 card': width > height}">
+      <div class="container h-100">
+        <div class="h-100" v-if="home">
+          <card></card>
+          <div class="h-50 row row-cols-4 text-center p-3" :class="{'mx-auto': width > height}">
+            <div class="col-3 h-25" v-if="apps[0]">
+              <img src="../image/hand-index-thumb.svg" v-if="countNow[0] < countMok[0]" class="w-75" @click="count(0)">
+              <img src="../image/aa.svg" v-if="countNow[0] >= countMok[0]" class="w-75" @click="count(0)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[1]">
+              <img src="../image/hand-index-thumb2.svg" v-if="countNow[1] < countMok[1]" class="w-75" @click="count(1)">
+              <img src="../image/s.svg" v-if="countNow[1] >= countMok[1]" class="w-75" @click="count(1)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[2]">
+              <img src="../image/hand-index-thumb3.svg" v-if="countNow[2] < countMok[2]" class="w-75" @click="count(2)">
+              <img src="../image/A.svg" v-if="countNow[2] >= countMok[2]" class="w-75" @click="count(2)">
+            </div>
+            <div class="col-3 h-25">
+              <img src="../image/envelope.svg" class="w-75" @click="mai" v-if="!newmail">
+              <img src="../image/envelope-exclamation.svg" class="w-75" @click="mai" v-if="newmail">
+            </div>
+            <div class="col-3 h-25" v-if="apps[3]">
+              <img src="../image/lightbulb.svg" v-if="lightNow[0] != lightMok[0]" class="w-75" @click="light(0)">
+              <img src="../image/l.svg" v-if="lightNow[0] == lightMok[0]" class="w-75" @click="light(0)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[4]">
+              <img src="../image/lightbulb2.svg" v-if="lightNow[1] != lightMok[1]" class="w-75" @click="light(1)">
+              <img src="../image/n.svg" v-if="lightNow[1] == lightMok[1]" class="w-75" @click="light(1)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[5]">
+              <img src="../image/lightbulb3.svg" v-if="lightNow[2] != lightMok[2]" class="w-75" @click="light(2)">
+              <img src="../image/c.svg" v-if="lightNow[2] == lightMok[2]" class="w-75" @click="light(2)">
+            </div>
+            <div class="col-3 h-25">
+              <img src="../image/calculator.svg" class="w-75" @click="cal">
+            </div>
+            <div class="col-3 h-25" v-if="apps[6]">
+              <img src="../image/stopwatch.svg"
+                v-if="!(this.stopNow[0] >= this.stopMok[0] - 0.5 && this.stopNow[0] <= this.stopMok[0] + 0.5)"
+                class="w-75" @click="stopwatch(0)">
+              <img src="../image/p.svg"
+                v-if="this.stopNow[0] >= this.stopMok[0] - 0.5 && this.stopNow[0] <= this.stopMok[0] + 0.5" class="w-75"
+                @click="stopwatch(0)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[7]">
+              <img src="../image/stopwatch2.svg"
+                v-if="!(this.stopNow[1] >= this.stopMok[1] - 0.5 && this.stopNow[1] <= this.stopMok[1] + 0.5)"
+                class="w-75" @click="stopwatch(1)">
+              <img src="../image/i.svg"
+                v-if="this.stopNow[1] >= this.stopMok[1] - 0.5 && this.stopNow[1] <= this.stopMok[1] + 0.5" class="w-75"
+                @click="stopwatch(1)">
+            </div>
+            <div class="col-3 h-25" v-if="apps[8]">
+              <img src="../image/stopwatch3.svg"
+                v-if="!(stopNow[2] != '' && this.stopNow[2] >= this.stopMok[2] - 0.5 && this.stopNow[2] <= this.stopMok[2] + 0.5)"
+                class="w-75" @click="stopwatch(2)">
+              <img src="../image/t.svg"
+                v-if="stopNow[2] != '' && this.stopNow[2] >= this.stopMok[2] - 0.5 && this.stopNow[2] <= this.stopMok[2] + 0.5"
+                class="w-75" @click="stopwatch(2)">
+            </div>
+            <div class="col-3 h-25">
+              <a href="https://edodo2.github.io/" tabindex="-1" id="b" target="_blank" rel="noopener noreferrer">
+                <img src="../image/browser-chrome.svg" class="w-75">
+              </a>
+            </div>
+            <div class="col-3 h-25" v-if="apps[9]">
+              <img src="../image/question-square.svg" v-if="ans!=166160" class="w-75" @click="tutorial">
+              <img src="../image/o.svg" v-if="ans==166160" class="w-75" @click="tutorial">
+            </div>
+            <div class="col-3 h-25" v-if="apps[2] && apps[5] && apps[8]">
+            </div>
+            <div class="col-3 h-25" v-if="apps[11]">
+              <img src="../image/shop.svg" class="w-75" @click="shop">
+            </div>
+            <div class="col-3 h-25" v-if="apps[10]">
+              <img src="../image/twitter.svg" class="w-75" @click="twitter">
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="mail">
+          <div class="h-75 w-100 overflow-auto" :class="{'mx-auto': width > height}">
+            <p>メール:{{mailstep}}件</p>
+            <div class="accordion" id="accordionFlushExample">
+              <div class="accordion-item" v-if="mailstep > 2">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    アプリマスターへの挑戦状
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                  data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <p>一般公開されているアプリをすべてクリアしたあなたに、特別なアプリをお届けします。</p>
+                    <p>連打3</p><button type="button" class="btn btn-light" @click="appt(2)" v-if="!apps[2]">インストール<img
+                        src="../image/download.svg"></button>
+                    <button type="button" class="btn btn-light" disabled v-if="apps[2]">インストール済</button>
+                    <p>ライツアウト3</p>
+                    <button type="button" class="btn btn-light" @click="appt(5)" v-if="!apps[5]">インストール<img
+                        src="../image/download.svg"></button>
+                    <button type="button" class="btn btn-light" disabled v-if="apps[5]">インストール済</button>
+                    <p>計測3</p>
+                    <button type="button" class="btn btn-light" @click="appt(8)" v-if="!apps[8]">インストール<img
+                        src="../image/download.svg"></button>
+                    <button type="button" class="btn btn-light" disabled v-if="apps[8]">インストール済</button>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item" v-if="mailstep > 1">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    初アプリクリア、おめでとうございます！
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                  data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <p>アプリクリア、おめでとうございます！</p>
+                    <p>初アプリクリアの記念に、ストアにスペシャルなアプリを追加！</p>
+                    <p>是非覗いてみてくださいね！</p>
+                    <p></p>
+                    <p>※これ以降、ストアへの追加は発生しません</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item" v-if="mailstep > 0">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    『Applications』へようこそ
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                  data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <p>Applications へようこそ。</p>
+                    <p>クリアツイートボタンを目指し Applications のさまざまなアプリを探検しましょう。</p>
+                    <p>お近づきの印として、ストアアプリをプレゼント！</p>
+                    <button type="button" class="btn btn-light" @click="appt(11)" v-if="!apps[11]">インストール<img
+                        src="../image/download.svg"></button>
+                    <button type="button" class="btn btn-light" disabled v-if="apps[11]">インストール済</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="sho">
+          <div class="h-75 w-100 overflow-auto" :class="{'mx-auto': width > height}">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">？</h5>
+                <h6 class="card-subtitle mb-2 text-muted">？？？？？？？？？？</h6>
+                <p class="card-text">
+                  <button type="button" class="btn btn-light" @click="appt(9)" v-if="!apps[9]">インストール<img
+                      src="../image/download.svg"></button>
+                  <button type="button" class="btn btn-light" disabled v-if="apps[9]">インストール済</button>
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">連打カウンター</h5>
+                <h6 class="card-subtitle mb-2 text-muted">クッキーは焼かないよ</h6>
+                <p class="card-text">
+                  <button type="button" class="btn btn-light" @click="appt(0)" v-if="!apps[0]">インストール<img
+                      src="../image/download.svg"></button>
+                  <button type="button" class="btn btn-light" disabled v-if="apps[0]">インストール済</button>
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">よくあるあれ</h5>
+                <h6 class="card-subtitle mb-2 text-muted">電気を消すやつ</h6>
+                <p class="card-text">
+                  <button type="button" class="btn btn-light" @click="appt(3)" v-if="!apps[3]">インストール<img
+                      src="../image/download.svg"></button>
+                  <button type="button" class="btn btn-light" disabled v-if="apps[3]">インストール済</button>
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">計測</h5>
+                <h6 class="card-subtitle mb-2 text-muted">自信ありますか？</h6>
+                <p class="card-text">
+                  <button type="button" class="btn btn-light" @click="appt(6)" v-if="!apps[6]">インストール<img
+                      src="../image/download.svg"></button>
+                  <button type="button" class="btn btn-light" disabled v-if="apps[6]">インストール済</button>
+                </p>
+              </div>
+            </div>
+            <div class="card" v-if="mailstep > 1">
+              <div class="card-body">
+                <h5 class="card-title">クリアツイートアプリ</h5>
+                <h6 class="card-subtitle mb-2 text-muted">クリアツイートボタンはここに</h6>
+                <p class="card-text">
+                  <button type="button" class="btn btn-light" @click="appt(10)" v-if="!apps[10]">インストール<img
+                      src="../image/download.svg"></button>
+                  <button type="button" class="btn btn-light" disabled v-if="apps[10]">インストール済</button>
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+
+        <div class="h-100" v-if="tuto">
+          <div class="h-25 p-3">
+            <div class="card h-100">
+              <div class="h-25"></div>
+              <div class="card-body">
+                <h5 class="card-title"><input type="number" class="form-control" v-model="ans"></h5>
+                <h6 class="card-subtitle mb-2 text-muted">答えは？</h6>
+                <p class="card-text" v-if="ans==166160">クリア</p>
+              </div>
+              <div class="h-25"></div>
+            </div>
+          </div>
+          <div class="h-50 text-center p-3">
+            <div class="row h-25">
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==3}">
+              </div>
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==4}">
+              </div>
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==2 || tnow==5}">
+              </div>
+              <div class="col border h-100 p-2">
+              </div>
+
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==1|| tnow==6}">
+              </div>
+              <div class="col border h-100 p-2">
+              </div>
+              <div class="col border h-100 p-2">
+              </div>
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==7}">
+              </div>
+              <div class="col h-100 border-top border-start border-end p-2">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==0}">
+              </div>
+              <div class="col border h-100 p-2" :class="{'bg-secondary':tnow==8}">
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="coun">
+          <div class="h-25 p-3">
+            <div class="card h-100">
+              <div class="h-25"></div>
+              <div class="card-body">
+                <h5 class="card-title">{{countNow[counNum]}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">増やせ</h6>
+                <p class="card-text" :class="{'fst-italic':counNum ==2}">目標 :{{countMok[counNum]}}
+                </p>
+              </div>
+              <div class="h-25"></div>
+            </div>
+          </div>
+          <div class="h-25">
+            <button @click="countUp(counNum)" class="button h-100 w-100"><img src="../image/hand-index-thumb.svg"
+                class="w-75 h-75"></button>
+          </div>
+          <div class="h-25">
+            <div v-if="countNow[counNum] >= countMok[counNum]">
+              <p>クリア！</p>
+              <div v-if="counNum == 0">
+                <p>さらなる連打が君を待つ</p>
+                <button type="button" class="btn btn-light" @click="appt(1)" v-if="!apps[1]">インストール<img
+                    src="../image/download.svg"></button>
+                <button type="button" class="btn btn-light" disabled v-if="apps[1]">インストール済</button>
+              </div>
+            </div>
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="stopw">
+          <div class="h-25 p-3">
+            <div class="card h-100">
+              <div class="h-25"></div>
+              <div class="card-body">
+                <h5 class="card-title">{{stopNow[stopNum]}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">目標±0.5以内にしましょう</h6>
+                <p class="card-text" :class="{'fst-italic':stopNum ==2}">目標 : {{stopMok[stopNum]}}</p>
+              </div>
+              <div class="h-25"></div>
+            </div>
+          </div>
+          <div class="h-25">
+            <button @click="stopStart(stopNum)" :disabled="stopNow[stopNum] =='測定中'"
+              class="button h-100 w-50">start</button>
+            <button @click="stopStop(stopNum)" :disabled="stopNow[stopNum] !='測定中'"
+              class="button h-100 w-50">stop</button>
+          </div>
+          <div class="h-25">
+            <div v-if="stopNow[2] != '' && this.stopNow[2] >= this.stopMok[2] - 0.5 && this.stopNow[2] <= this.stopMok[2] + 0.5">
+              <p>クリア！</p>
+              <div v-if="stopNum == 0">
+                <p>ちょっと難易度上げますね</p>
+                <button type="button" class="btn btn-light" @click="appt(7)" v-if="!apps[7]">インストール<img
+                    src="../image/download.svg"></button>
+                <button type="button" class="btn btn-light" disabled v-if="apps[7]">インストール済</button>
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+
+        <div class="h-100" v-if="ligh">
+          <div class="h-25 p-3">
+            <div class="card h-100">
+              <div class="h-25"></div>
+              <div class="card-body">
+                <h5 class="card-title">{{lightNow[lightNum]}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">同じ数にしましょう</h6>
+                <p class="card-text" :class="{'fst-italic':lightNum ==2}">目標 : {{lightMok[lightNum]}}</p>
+              </div>
+              <div class="h-25"></div>
+            </div>
+          </div>
+          <div class="h-25">
+            <div class="row h-25 mx-auto">
+              <button @click="lightUp(lightNum,0,0)" :class="{'bg-black':li[lightNum][0][0]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,1,0)" :class="{'bg-black':li[lightNum][1][0]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,2,0)" :class="{'bg-black':li[lightNum][2][0]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,3,0)" :class="{'bg-black':li[lightNum][3][0]}" v-if="lightNum > 0"
+                class="button h-100 w-25"></button>
+            </div>
+
+            <div class="row h-25 mx-auto">
+              <button @click="lightUp(lightNum,0,1)" :class="{'bg-black':li[lightNum][0][1]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,1,1)" :class="{'bg-black':li[lightNum][1][1]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,2,1)" :class="{'bg-black':li[lightNum][2][1]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,3,1)" :class="{'bg-black':li[lightNum][3][1]}" v-if="lightNum > 0"
+                class="button h-100 w-25"></button>
+            </div>
+
+            <div class="row h-25 mx-auto">
+              <button @click="lightUp(lightNum,0,2)" :class="{'bg-black':li[lightNum][0][2]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,1,2)" :class="{'bg-black':li[lightNum][1][2]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,2,2)" :class="{'bg-black':li[lightNum][2][2]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,3,2)" :class="{'bg-black':li[lightNum][3][2]}" v-if="lightNum > 0"
+                class="button h-100 w-25"></button>
+            </div>
+
+            <div class="row h-25 mx-auto" v-if="lightNum > 0">
+              <button @click="lightUp(lightNum,0,3)" :class="{'bg-black':li[lightNum][0][3]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,1,3)" :class="{'bg-black':li[lightNum][1][3]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,2,3)" :class="{'bg-black':li[lightNum][2][3]}"
+                class="button h-100 w-25"></button>
+              <button @click="lightUp(lightNum,3,3)" :class="{'bg-black':li[lightNum][3][3]}"
+                class="button h-100 w-25"></button>
+            </div>
+          </div>
+          <div class="h-25">
+            <div v-if="lightNow[lightNum] == lightMok[lightNum]">
+              <p>クリア！</p>
+              <div v-if="lightNum == 0">
+                <p>増やします</p>
+                <button type="button" class="btn btn-light" @click="appt(4)" v-if="!apps[4]">インストール<img
+                    src="../image/download.svg"></button>
+                <button type="button" class="btn btn-light" disabled v-if="apps[4]">インストール済</button>
+              </div>
+            </div>
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="calculator">
+          <div class="h-25">
+            <div class="card h-100">
+              <div class="card-body">
+                <p class="text-end" :class="{'display-2': width < height}">{{calNow}}</p>
+                <p class="fst-italic text-end" :class="{'display-1': width < height}">{{calNum}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="h-50 text-center p-3">
+            <div class="row h-25">
+              <div class="col border h-100 p-2" @click="ca(7)">
+                <img src="../image/7.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(8)">
+                <img src="../image/8.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(9)">
+                <img src="../image/9.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="capmk('*')">
+                <img src="../image/kakeru.svg" class="w-75">
+              </div>
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2" @click="ca(4)">
+                <img src="../image/4.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(5)">
+                <img src="../image/5.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(6)">
+                <img src="../image/6.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="capmk('-')">
+                <img src="../image/minus.svg" class="w-75">
+              </div>
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2" @click="ca(1)">
+                <img src="../image/1.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(2)">
+                <img src="../image/2.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ca(3)">
+                <img src="../image/3.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="capmk('+')">
+                <img src="../image/plus.svg" class="w-75">
+              </div>
+            </div>
+            <div class="row h-25">
+              <div class="col border h-100 p-2" @click="ca(0)">
+                <img src="../image/0.svg" class="w-75">
+              </div>
+              <div class="col h-100 border-top border-start border-end p-2">
+              </div>
+              <div class="col border h-100 p-2" @click="ac">
+                <img src="../image/AC.svg" class="w-75">
+              </div>
+              <div class="col border h-100 p-2" @click="ec">
+                <img src="../image/equal.svg" class="w-75">
+              </div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+        <div class="h-100" v-if="twi">
+          <div class="h-25 p-3">
+            <div class="card h-100">
+              <div class="h-25"></div>
+              <div class="card-body text-center">
+                <h5 class="card-title">アプリパスワードを入力してください</h5>
+                <h6 class="card-subtitle mb-2 text-muted">『 <img src="../image/circle.svg" v-if="twiC < 1"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 2"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 3"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 4"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 5"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 6"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 7"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 8"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 9"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 10"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 11"><img
+                    src="../image/circle-fill.svg" v-else> <img src="../image/circle.svg" v-if="twiC < 12"><img
+                    src="../image/circle-fill.svg" v-else> 』</h6>
+              </div>
+              <div class="h-25"></div>
+            </div>
+          </div>
+          <div class="h-50 p-3">
+            <div class="row h-25">
+              <div class="col h-100"></div>
+              <div class="col h-100"><img src="../image/1-circle.svg" class="h-100 w-100" @click="twiapp(1)"></div>
+              <div class="col h-100"><img src="../image/2-circle.svg" class="h-100 w-100" @click="twiapp(2)"></div>
+              <div class="col h-100"><img src="../image/3-circle.svg" class="h-100 w-100" @click="twiapp(3)"></div>
+              <div class="col h-100"></div>
+            </div>
+            <div class="row h-25">
+              <div class="col h-100"></div>
+              <div class="col h-100"><img src="../image/4-circle.svg" class="h-100 w-100" @click="twiapp(4)"></div>
+              <div class="col h-100"><img src="../image/5-circle.svg" class="h-100 w-100" @click="twiapp(5)"></div>
+              <div class="col h-100"><img src="../image/6-circle.svg" class="h-100 w-100" @click="twiapp(6)"></div>
+              <div class="col h-100"></div>
+            </div>
+            <div class="row h-25">
+              <div class="col h-100"></div>
+              <div class="col h-100"><img src="../image/7-circle.svg" class="h-100 w-100" @click="twiapp(7)"></div>
+              <div class="col h-100"><img src="../image/8-circle.svg" class="h-100 w-100" @click="twiapp(8)"></div>
+              <div class="col h-100"><img src="../image/9-circle.svg" class="h-100 w-100" @click="twiapp(9)"></div>
+              <div class="col h-100"></div>
+            </div>
+            <div class="row h-25">
+              <div class="col h-100"></div>
+              <div class="col h-100"></div>
+              <div class="col h-100"><img src="../image/0-circle.svg" class="h-100 w-100" @click="twiapp(0)"></div>
+              <div class="col h-100"></div>
+              <div class="col h-100"></div>
+            </div>
+
+          </div>
+          <div class="h-25">
+            <house @hom="hom"></house>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+      <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen h-100">
+          <div class="modal-content container">
+            <div class="modal-header">
+              <h5 class="modal-title">Applications Clear!!</h5>
+            </div>
+            <div class="modal-body">
+              <p>おめでとうございます！</p>
+              <p>PDCAサイクルと言いたいがための4作目Applications、楽しめていただけていたら幸いです。</p>
+              <p>高々6通りを試すもよし、力技で全部クリアするのもよし、あることに気づいて楽にクリアするもよしです。</p>
+              <p>最後までお付き合いいただきありがとうございました</p>
+              <a class="btn btn-primary btn-lg m-3"
+                href="https://twitter.com/intent/tweet?hashtags=Applications_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8EApplications%E3%80%8F Clear!!&amp;url=https%3A%2F%2Fedodo2.github.io%2Fapplications%2Fstart.html"
+                tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg"
+                  width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                  <path
+                    d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                  </path>
+                </svg>クリアツイートする</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/vue.global.prod.js"></script>
+  <script src="../js/applications.js"></script>
+</body>
+
+</html>
