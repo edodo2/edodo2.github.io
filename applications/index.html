@@ -354,7 +354,7 @@
               class="button h-100 w-50">stop</button>
           </div>
           <div class="h-25">
-            <div v-if="stopNow[2] != '' && this.stopNow[2] >= this.stopMok[2] - 0.5 && this.stopNow[2] <= this.stopMok[2] + 0.5">
+            <div v-if="stopNow[stopNum] != '' && this.stopNow[stopNum] >= this.stopMok[stopNum] - 0.5 && this.stopNow[stopNum] <= this.stopMok[stopNum] + 0.5">
               <p>クリア！</p>
               <div v-if="stopNum == 0">
                 <p>ちょっと難易度上げますね</p>
