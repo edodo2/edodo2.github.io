@@ -2,6 +2,15 @@
 <html lang="ja">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-B83MV7YCDW');
+  </script>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../css/bootstrap.css">
@@ -354,7 +363,8 @@
               class="button h-100 w-50">stop</button>
           </div>
           <div class="h-25">
-            <div v-if="stopNow[stopNum] != '' && this.stopNow[stopNum] >= this.stopMok[stopNum] - 0.5 && this.stopNow[stopNum] <= this.stopMok[stopNum] + 0.5">
+            <div
+              v-if="stopNow[stopNum] != '' && this.stopNow[stopNum] >= this.stopMok[stopNum] - 0.5 && this.stopNow[stopNum] <= this.stopMok[stopNum] + 0.5">
               <p>クリア！</p>
               <div v-if="stopNum == 0">
                 <p>ちょっと難易度上げますね</p>
