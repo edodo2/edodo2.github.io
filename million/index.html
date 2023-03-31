@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-B83MV7YCDW');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7932237784497010"
+  crossorigin="anonymous"></script>
+  <!-- Google end -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+  <title>Million</title>
+</head>
+
+<body id="app">
+  <div v-if="!load">
+    なうろーでぃんぐ
+  </div>
+  <div class="d-none h-100" id="loading">
+    <div class="container">
+      <p>現在：1/{{ritu}}</p>
+      <p>{{setsumei}}</p>
+      <div class="row-cols-5">
+        <button v-if="!challenge" v-for="(item, index) in taku" @click="set(index)" class="button" :disabled="kekka[index]">1/{{item}}</button>
+        <button v-if="challenge" v-for="item in kazu" @click="go(item)" class="button">{{item}}</button>
+      </div>
+    </div>
+    <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen h-100">
+        <div class="modal-content container">
+          <div class="modal-header">
+            <h5 class="modal-title">Million {{rizaruto}}</h5>
+          </div>
+          <div class="modal-body">
+            <div v-if="clear">
+              <p>おめでとうございます！1/1000000 を突破しました！</p>
+              <p>シンプルにすごい！</p>
+              <p>私、絶望要塞好きなんですよね。</p>
+              <p>記録：1/{{ritu}}</p>
+            </div>
+            <div v-else>
+              <p>残念！</p>
+              <p>記録：1/{{ritu}}</p>
+              <button onclick="window.location.reload(true);" class="button">再挑戦</button>
+            </div>
+            <a class="btn btn-primary btn-lg m-3" :href="twibun"
+              href="https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&amp;text="
+              tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                <path
+                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                </path>
+              </svg>{{kekka2}}ツイートする</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/vue.global.prod.js"></script>
+  <script src="../js/million.js"></script>
+</body>
+
+</html>
