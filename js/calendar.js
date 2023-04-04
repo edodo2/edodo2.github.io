@@ -170,7 +170,7 @@ app.component('task', {
 });
 
 
-const vm = app.mount('#app');
+const vm = app.mount('#calendarapp');
 
 const theyModal = new bootstrap.Modal(document.getElementById('cmodal'), {
   keyboard: false

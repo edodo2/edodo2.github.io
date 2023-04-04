@@ -42,7 +42,7 @@ const RenderHtmlApp = {
     }
   }
 }
-Vue.createApp(RenderHtmlApp).mount('#app');
+Vue.createApp(RenderHtmlApp).mount('#diceapp');
 
 const yourModal = new bootstrap.Modal(document.getElementById('amodal'), {
   keyboard: false

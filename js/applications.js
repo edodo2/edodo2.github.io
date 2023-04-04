@@ -284,7 +284,7 @@ app.component('card', {
 
 
 
-const vm = app.mount('#app');
+const vm = app.mount('#applications');
 
 const theyModal = new bootstrap.Modal(document.getElementById('cmodal'), {
   keyboard: false

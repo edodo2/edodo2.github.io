@@ -20,7 +20,13 @@
   <title>Web謎『Calendar』</title>
 </head>
 
-<body id="app">
+<body id="calendarapp">
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="../" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+    </ul>
+  </header>
   <div class="text-center mx-auto w-25" :class="{'d-none': height > width}">
     スマートフォン用QR、つけておきますね
     <img src="../image/QR_471232.png" class="w-50 img-thumbnail">
@@ -54,11 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="text-end">
-    <a href="../privacy-policy/" tabindex="-1" id="b" target="_blank" rel="noopener noreferrer">
-      プライバシーポリシー
-    </a>
-  </div>
+  
   <script src="../js/bootstrap.bundle.js"></script>
   <script src="../js/vue.global.prod.js"></script>
   <script src="../js/calendar.js"></script>

@@ -6,4 +6,4 @@ const RenderHtmlApp = {
     }
   }
 }
-Vue.createApp(RenderHtmlApp).mount('#app');
+Vue.createApp(RenderHtmlApp).mount('#pictureapp');
