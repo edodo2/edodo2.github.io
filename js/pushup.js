@@ -9,7 +9,8 @@ const RenderHtmlApp = {
             addok: false,
             quick: param == "?mode=1",
             counter: null,
-            now: 0
+            now: 0,
+            pre: 0
         }
     },
     methods: {
@@ -18,6 +19,13 @@ const RenderHtmlApp = {
                 this.start();
             } else if (this.addok) {
                 this.addok = this.quick;
+                if (this.quick) {
+                    var now = new Date().getTime();
+                    if (now - this.pre < 100) {
+                        return;
+                    }
+                    this.pre = now;
+                }
                 this.count++;
             }
         },
