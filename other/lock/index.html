@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-B83MV7YCDW');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7932237784497010"
+    crossorigin="anonymous"></script>
+  <!-- Google end -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+
+  <title>ロック解除ゲーム</title>
+</head>
+
+<body id="lockapp" style="height:100vh">
+  <div v-if="!load">
+    なうろーでぃんぐ
+  </div>
+  <div class="m-1 d-none h-100" :class="{'mx-auto w-25 card': width > height}" id="loading">
+    <div class="card h-25 text-center">
+      <div class="h-50"></div>
+      <div class="h-25 m-0 row text-center">
+        <h1 class="col card" :class="{'bg-success':typ[0]>-1 && ans[0] == typ[0],'bg-danger':typ[0]>-1 && ans[0] != typ[0]}">
+          {{ans[0]}}</h1>
+        <h1 class="col card" :class="{'bg-success':typ[1]>-1 && ans[1] == typ[1],'bg-danger':typ[1]>-1 && ans[1] != typ[1]}">
+          {{ans[1]}}</h1>
+        <h1 class="col card" :class="{'bg-success':typ[2]>-1 && ans[2] == typ[2],'bg-danger':typ[2]>-1 && ans[2] != typ[2]}">
+          {{ans[2]}}</h1>
+        <h1 class="col card" :class="{'bg-success':typ[3]>-1 && ans[3] == typ[3],'bg-danger':typ[3]>-1 && ans[3] != typ[3]}">
+          {{ans[3]}}</h1>
+      </div>
+    </div>
+    <div class="card h-50 text-center">
+      <div class="row h-25">
+        <div class="col h-100"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[1] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[1])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[2] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[2])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[3] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[3])"></div>
+        <div class="col h-100"></div>
+      </div>
+      <div class="row h-25">
+        <div class="col h-100"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[4] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[4])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[5] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[5])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[6] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[6])"></div>
+        <div class="col h-100"></div>
+      </div>
+      <div class="row h-25">
+        <div class="col h-100"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[7] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[7])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[8] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[8])"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[9] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[9])"></div>
+        <div class="col h-100"></div>
+      </div>
+      <div class="row h-25">
+        <div class="col h-100"></div>
+        <div class="col h-100"></div>
+        <div class="col h-100"><img :src="'../../image/'+ ichi[0] +'-circle.svg'" class="h-100 w-100"
+            @click="numosu(ichi[0])"></div>
+        <div class="col h-100"></div>
+        <div class="col h-100"></div>
+      </div>
+    </div>
+    <div class="card h-25 text-center">
+      <h1>{{count}}</h1>
+    </div>
+
+    <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-fullscreen h-100">
+        <div class="modal-content container">
+          <div class="modal-header">
+            <h5 class="modal-title">記録:{{count}}回</h5>
+          </div>
+          <div class="modal-body">
+            <p>あなたは {{count}} 回ロックを解除した！</p>
+            <button onclick="window.location.reload(true);" class="button">再挑戦</button>
+            <a class="btn btn-primary btn-lg m-3" :href="twibun" tabindex="-1" id="b" target="_blank"
+              rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                <path
+                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                </path>
+              </svg>ツイートする</a>
+            <p><a href="../../" target="_blank" rel="noopener noreferrer">サイトトップページへ</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../js/bootstrap.bundle.js"></script>
+  <script src="../../js/vue.global.prod.js"></script>
+  <script src="../../js/lock.js"></script>
+</body>
+
+</html>

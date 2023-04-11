@@ -70,7 +70,7 @@ const RenderHtmlApp = {
 };
 const app = Vue.createApp(RenderHtmlApp);
 
-const vm = app.mount('#applications');
+const vm = app.mount('#pushapp');
 
 const theyModal = new bootstrap.Modal(document.getElementById('cmodal'), {
     keyboard: false
