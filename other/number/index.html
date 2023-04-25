@@ -32,7 +32,7 @@
     </div>
     <div class="h-50 text-center">
       <div class="row-cols-4 h-100">
-        <button class="h-25 btn btn-light" v-for="(item,index) in nums" @click="push(index)">{{item}}</button>
+        <button class="h-25 btn btn-light" v-for="(item,index) in nums" @mousedown="push(index)" @touchstart="push(index)">{{item}}</button>
       </div>
     </div>
     <div class="h-25 text-center">
