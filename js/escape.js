@@ -398,7 +398,7 @@ const RenderHtmlApp = {
         },
         migiFunc() {
             if (this.nowi == "はさみ") {
-                if (this.item.has("ライト")) {
+                if (this.kamiget && this.item.has("ライト")) {
                     this.item.set("み", map["み"]);
                     this.item.set("ぎ", map["ぎ"]);
                     this.text = "正面以外認識できなくなった、動けない";
