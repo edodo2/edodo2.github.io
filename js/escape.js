@@ -404,7 +404,7 @@ const RenderHtmlApp = {
                     this.text = "正面以外認識できなくなった、動けない";
                     this.migi = false;
                 } else {
-                    this.text = "いま「みぎ」を切ってしまうと詰む、必須アイテムを持った状態で切ろう(天の声)";
+                    this.text = "いま「みぎ」を切ってしまうと詰む(天の声)";
                 }
                 this.nowi = "";
             } else {
