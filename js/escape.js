@@ -236,6 +236,10 @@ const RenderHtmlApp = {
                     else if (this.dai == "み" || this.dai == "み ") {
                         if (this.nowi == "か") {
                             this.item.delete(this.nowi);
+                            if(this.dai == "み"){
+                                this.item.delete("み ");
+                                this.item.set("み", map["み"]);
+                            }
                             this.item.set("かみ", map["かみ"]);
                             this.dai = "";
                             this.text = "OPENと書かれている紙に戻った";
@@ -248,6 +252,10 @@ const RenderHtmlApp = {
                         }
                         if (this.nowi == "ぎ") {
                             this.item.delete(this.nowi);
+                            if(this.dai == "み "){
+                                this.item.delete("み");
+                                this.item.set("み ", map["み "]);
+                            }
                             this.item.set("みぎ", map["みぎ"]);
                             this.dai = "";
                             this.text = "右のイデアだ";
@@ -287,12 +295,20 @@ const RenderHtmlApp = {
                         }
                     } else if (this.nowi == "か") {
                         if (this.dai == "み" || this.dai == "み ") {
+                            if(this.dai == "み"){
+                                this.item.delete("み ");
+                                this.item.set("み", map["み"]);
+                            }
                             this.item.delete(this.nowi);
                             this.item.set("かみ", map["かみ"]);
                             this.dai = "";
                             this.text = "OPENと書かれている紙に戻った";
                         }
                         if (this.dai == "ぎ") {
+                            if(this.dai == "み "){
+                                this.item.delete("み");
+                                this.item.set("み ", map["み "]);
+                            }
                             this.item.delete(this.nowi);
                             this.item.set("かぎ", map["かぎ"]);
                             this.dai = "";
