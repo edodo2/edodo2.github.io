@@ -236,7 +236,7 @@ const RenderHtmlApp = {
                     else if (this.dai == "み" || this.dai == "み ") {
                         if (this.nowi == "か") {
                             this.item.delete(this.nowi);
-                            if(this.dai == "み"){
+                            if (this.dai == "み") {
                                 this.item.delete("み ");
                                 this.item.set("み", map["み"]);
                             }
@@ -252,7 +252,7 @@ const RenderHtmlApp = {
                         }
                         if (this.nowi == "ぎ") {
                             this.item.delete(this.nowi);
-                            if(this.dai == "み "){
+                            if (this.dai == "み ") {
                                 this.item.delete("み");
                                 this.item.set("み ", map["み "]);
                             }
@@ -295,7 +295,7 @@ const RenderHtmlApp = {
                         }
                     } else if (this.nowi == "か") {
                         if (this.dai == "み" || this.dai == "み ") {
-                            if(this.dai == "み"){
+                            if (this.dai == "み") {
                                 this.item.delete("み ");
                                 this.item.set("み", map["み"]);
                             }
@@ -305,7 +305,7 @@ const RenderHtmlApp = {
                             this.text = "OPENと書かれている紙に戻った";
                         }
                         if (this.dai == "ぎ") {
-                            if(this.dai == "み "){
+                            if (this.dai == "み ") {
                                 this.item.delete("み");
                                 this.item.set("み ", map["み "]);
                             }
@@ -329,6 +329,11 @@ const RenderHtmlApp = {
                         this.item.set("み", map["み"]);
                         this.item.set("ぎ", map["ぎ"]);
                         this.text = "切れた";
+                    } else if (this.dai == "かぎ" && this.nowi == "はさみ") {
+                        this.dai = "";
+                        this.item.set("か", map["か"]);
+                        this.item.set("ぎ", map["ぎ"]);
+                        this.text = "切っちゃうんですか？？？？？";
                     } else {
                         this.text = "組み合わせられそうにない";
                     }
