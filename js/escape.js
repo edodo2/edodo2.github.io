@@ -248,7 +248,7 @@ const RenderHtmlApp = {
                         }
                         if (this.nowi == "ぎ") {
                             this.item.delete(this.nowi);
-                            this.item.set("みぎ", map["みぎぎ"]);
+                            this.item.set("みぎ", map["みぎ"]);
                             this.dai = "";
                             this.text = "右のイデアだ";
                         }
