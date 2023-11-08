@@ -42,6 +42,9 @@ const RenderHtmlApp = {
             if (n == m && this.sanmoku[(n + 1) % 3][(m + 1) % 3] == this.turn && this.sanmoku[(n + 2) % 3][(m + 2) % 3] == this.turn) {
                 this.win = this.turn;
             }
+            if (n + m == 2 && this.sanmoku[(n +1) % 3][(m + 2) % 3] == this.turn && this.sanmoku[(n + 2) % 3][(m + 4) % 3] == this.turn) {
+                this.win = this.turn;
+            }
             if (this.sanmoku[n][(m + 1) % 3] == this.turn && this.sanmoku[n][(m + 2) % 3] == this.turn) {
                 this.win = this.turn;
             }
@@ -98,7 +101,6 @@ const RenderHtmlApp = {
                         kei = kei + kakuritsu[i][j];
                         if (kei >= oku) {
                             this.ton(i, j);
-
                             return;
                         }
                     }
