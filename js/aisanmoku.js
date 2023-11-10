@@ -166,7 +166,7 @@ const RenderHtmlApp = {
             if (this.you != "" && this.win != "" && this.win != this.you) {
                 this.end = true;
                 this.nextf = false;
-                this.twibun = twtx +  "【AIさんもく】 " + this.uragakushunum + "点";
+                this.twibun = twtx +  "【AIさんもく】 " + this.gakushunum + "点";
                 return;
             }
             if (this.win == "O") {
