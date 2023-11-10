@@ -166,6 +166,7 @@ const RenderHtmlApp = {
             if (this.you != "" && this.win != "" && this.win != this.you) {
                 this.end = true;
                 this.nextf = false;
+                this.twibun = twtx +  "【AIさんもく】 " + this.uragakushunum + "点";
                 return;
             }
             if (this.win == "O") {
@@ -284,11 +285,6 @@ const RenderHtmlApp = {
             this.gakushunum++;
             this.uragakushunum++;
             this.kioku = [];
-            if (this.you != "" && this.you == this.win) {
-                this.end = true;
-                this.twibun = twtx +  "【AIさんもく】 " + this.uragakushunum + "点";
-                return;
-            }
             if (this.you != "" && "" == this.win) {
                 this.you = this.you == "X" ? "O" : "X";
                 this.end = false;
