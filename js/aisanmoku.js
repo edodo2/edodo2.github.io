@@ -285,6 +285,10 @@ const RenderHtmlApp = {
             this.gakushunum++;
             this.uragakushunum++;
             this.kioku = [];
+            if (this.you != "" && this.you == this.win) {
+                this.end = true;
+                return;
+            }
             if (this.you != "" && "" == this.win) {
                 this.you = this.you == "X" ? "O" : "X";
                 this.end = false;
