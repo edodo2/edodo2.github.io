@@ -20,7 +20,7 @@
   <title>edodo2の物置</title>
 </head>
 
-<body>
+<body id="top">
   <div class="container">
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
@@ -30,56 +30,18 @@
       </ul>
     </header>
     <p>自作の謎解きです。</p>
-    <div class="card">
+    <div class="card" v-for="item in nazolist">
       <div class="card-body">
-        <h5 class="card-title">Picture</h5>
-        <h6 class="card-subtitle mb-2 text-muted">久しぶりウェブ謎</h6>
-        <p class="card-text">動作環境調べてないな</p>
-        <a href="./picture/start.html" class="card-link">スタートページへ</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Dice</h5>
-        <h6 class="card-subtitle mb-2 text-muted">なんか思いついたので作った</h6>
-        <p class="card-text">むずい</p>
-        <a href="./dice/start.html" class="card-link">スタートページへ</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Calendar</h5>
-        <h6 class="card-subtitle mb-2 text-muted">ローディング初実装</h6>
-        <p class="card-text">デザイン崩れたらすまん</p>
-        <a href="./calendar/start.html" class="card-link">スタートページへ</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Applications</h5>
-        <h6 class="card-subtitle mb-2 text-muted">一区切り</h6>
-        <p class="card-text">PDCAのAです。</p>
-        <a href="./applications/start.html" class="card-link">スタートページへ</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Million</h5>
-        <h6 class="card-subtitle mb-2 text-muted">エイプリルフールにかこつけて嘘みたいに難しくしました</h6>
-        <p class="card-text">クリア者出てほしい、ガチ攻略勢求</p>
-        <a href="./million/start.html" class="card-link">スタートページへ</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Escape</h5>
-        <h6 class="card-subtitle mb-2 text-muted">いわゆる脱出ゲームです</h6>
-        <p class="card-text">気に入っていただけるといいのですが</p>
-        <a href="./escape/start.html" class="card-link">スタートページへ</a>
+        <h5 class="card-title">{{item.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{item.text1}}</h6>
+        <p class="card-text">{{item.text2}}</p>
+        <a :href="'./'+ item.href + '/start.html'" class="card-link">スタートページへ</a>
       </div>
     </div>
   </div>
   <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/vue.global.prod.js"></script>
+  <script src="js/top.js"></script>
 </body>
 
 </html>
