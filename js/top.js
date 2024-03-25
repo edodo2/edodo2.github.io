@@ -41,6 +41,13 @@ const RenderHtmlApp = {
                 text1: "いわゆる脱出ゲームです",
                 text2: "気に入っていただけるといいのですが",
                 href: "escape"
+            }
+            ,
+            {
+                title: "Signup",
+                text1: "一発ネタ",
+                text2: "難易度高いかも",
+                href: "signup"
             }]
         }
     },
