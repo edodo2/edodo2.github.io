@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-B83MV7YCDW');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7932237784497010"
+        crossorigin="anonymous"></script>
+    <!-- Google end -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+
+    <title>Signup</title>
+</head>
+
+<body id="signup">
+    <div v-if="!load">
+        なうろーでぃんぐ
+    </div>
+    <div class="d-none h-100" id="loading">
+        <div class="container">
+            <h1>クリアポストボタン表示サービス</h1>
+            <p>サインアップを完了するには、次のリンクをクリックし、パスワードを登録してください。</p>
+            <p><a class="link-opacity-50-hover" @click="start">https://example.com/signup?t=tgjdusenfndasfaeihuviseh&kokorahenhafuniki</a></p>
+        </div>
+        <div class="modal" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen h-100">
+                <div class="modal-content container">
+                    <div class="modal-header">
+                        <h5 class="modal-title">新規登録</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">id</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                    value="yourId@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword" v-model="pass">
+                                <div v-for="text in alert" class="alert alert-danger mb-0" role="alert">
+                                    {{text}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" :disabled="pass.length < 1" @click="send">登録</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen h-100">
+                <div class="modal-content container">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Signup Clear!!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>おめでとうございます！</p>
+                        <p>パスワードもそろそろ無くなるとか無くならないとか</p>
+                        <p>はじかれた回数:{{count}}回</p>
+                        <a class="btn btn-dark btn-lg m-3"
+                            href="https://twitter.com/intent/tweet?hashtags=Signup_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8ESignup%E3%80%8F Clear!!&amp;url=https%3A%2F%2Fedodo2.github.io%2Fsignup%2Fstart.html"
+                            tabindex="-1" id="b" target="_blank" rel="noopener noreferrer"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                            </svg>クリアポストする</a>
+                        <p><a href="../" target="_blank" rel="noopener noreferrer">サイトトップページへ</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/vue.global.prod.js"></script>
+    <script src="../js/signup.js"></script>
+</body>
+
+</html>
