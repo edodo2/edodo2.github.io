@@ -27,11 +27,11 @@
   <div class="d-none h-100" id="loading">
     <div class="h-75 text-center ">
       <div class="h-25 w-100 text-center row row-cols-3" v-for="(list,i) in stage">
-        <div class="col h-100 text-center fs-1 text-break" v-for="(item,index) in list">{{item != 0?item:""}}</div>
+        <div class="col h-100 text-center fs-1 text-break lh-1" v-for="(item,index) in list">{{item != 0?item:""}}</div>
       </div>
     </div>
     <div class="h-25 w-100 text-center row row-cols-3">
-      <button class="col h-100 btn btn-secondary fs-1 text-break" v-for="(item,index) in mySpace"
+      <button class="col h-100 btn btn-secondary fs-1 text-break lh-1" v-for="(item,index) in mySpace"
         @mousedown="push(index)" @touchstart="push(index)">{{item}}</button>
     </div>
     <div class="modal" id="endmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
