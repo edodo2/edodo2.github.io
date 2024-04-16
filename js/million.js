@@ -1,1 +1,83 @@
-const _0x26c878=_0x53f5;function _0x53f5(_0x4cbde5,_0x157d5c){const _0x175d15=_0x175d();return _0x53f5=function(_0x53f538,_0x2d41a3){_0x53f538=_0x53f538-0xb1;let _0x37a56f=_0x175d15[_0x53f538];return _0x37a56f;},_0x53f5(_0x4cbde5,_0x157d5c);}(function(_0xbe51da,_0x204bc6){const _0x4d1221=_0x53f5,_0x1ce71b=_0xbe51da();while(!![]){try{const _0x193b8a=-parseInt(_0x4d1221(0xc7))/0x1+-parseInt(_0x4d1221(0xb6))/0x2*(parseInt(_0x4d1221(0xd8))/0x3)+parseInt(_0x4d1221(0xb5))/0x4+parseInt(_0x4d1221(0xce))/0x5+-parseInt(_0x4d1221(0xdb))/0x6*(-parseInt(_0x4d1221(0xbe))/0x7)+-parseInt(_0x4d1221(0xb7))/0x8+-parseInt(_0x4d1221(0xd7))/0x9*(-parseInt(_0x4d1221(0xc9))/0xa);if(_0x193b8a===_0x204bc6)break;else _0x1ce71b['push'](_0x1ce71b['shift']());}catch(_0xd28fe7){_0x1ce71b['push'](_0x1ce71b['shift']());}}}(_0x175d,0x8be9f));const now=new Date(),RenderHtmlApp={'data'(){const _0x518ca1=_0x53f5;return{'load':![],'twibun':'https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&text=','kekka2':_0x518ca1(0xb3),'rizaruto':_0x518ca1(0xde),'clear':![],'stage':0x0,'ritu':0x1,'kekka':[![],![],![],![],![],![],![]],'taku':[0x2,0x2,0x2,0x5,0xa,0x19,0x64],'setsumei':_0x518ca1(0xcd),'challenge':![],'kazu':0x0,'ima':0x0};},'methods':{'set'(_0x207bd0){const _0x4f3873=_0x53f5;this[_0x4f3873(0xd0)]=this[_0x4f3873(0xbd)][_0x207bd0],this['ima']=_0x207bd0,this['challenge']=!![],this['setsumei']='当ててください、チャンスは1回のみです';},'go'(_0x28a4e0){const _0x8fc157=_0x53f5;ans[this[_0x8fc157(0xc8)]]%this['kazu']==_0x28a4e0%this[_0x8fc157(0xd0)]?(this[_0x8fc157(0xb1)][this[_0x8fc157(0xd3)]]=!![],this[_0x8fc157(0xd1)]=![],this[_0x8fc157(0xb2)]='挑戦する確率を選んでください',this[_0x8fc157(0xbc)]=this[_0x8fc157(0xbc)]*this[_0x8fc157(0xd0)],this[_0x8fc157(0xc8)]++,this[_0x8fc157(0xc8)]>0x6&&(this[_0x8fc157(0xdd)]=!![],this[_0x8fc157(0xc3)]=_0x8fc157(0xc0),this[_0x8fc157(0xcb)]='クリア',this[_0x8fc157(0xc4)]=this[_0x8fc157(0xc4)]+_0x8fc157(0xc1)+'1/'+this[_0x8fc157(0xbc)],theyModal['show']())):(this['rizaruto']='第'+(this[_0x8fc157(0xc8)]+0x1)+_0x8fc157(0xb9),this['stage']==0x6&&(this[_0x8fc157(0xc3)]=_0x8fc157(0xb8)),this[_0x8fc157(0xc4)]=this['twibun']+_0x8fc157(0xcc)+this[_0x8fc157(0xc3)]+_0x8fc157(0xc2)+this[_0x8fc157(0xbc)],theyModal[_0x8fc157(0xda)]());}},'mounted'(){const _0x303e4f=_0x53f5;window[_0x303e4f(0xb4)]=()=>{const _0x568b4e=_0x303e4f;document[_0x568b4e(0xcf)](_0x568b4e(0xdc))[_0x568b4e(0xd5)][_0x568b4e(0xdf)]('d-none'),this['load']=!![];};}},app=Vue[_0x26c878(0xc6)](RenderHtmlApp),ans=[now['getFullYear'](),now[_0x26c878(0xd6)]()+0x1,now[_0x26c878(0xd2)](),now[_0x26c878(0xbb)](),now['getMinutes'](),now[_0x26c878(0xd4)](),now[_0x26c878(0xbf)]()],vm=app[_0x26c878(0xba)](_0x26c878(0xd9)),theyModal=new bootstrap[(_0x26c878(0xc5))](document[_0x26c878(0xcf)](_0x26c878(0xca)),{'keyboard':![]});function _0x175d(){const _0x3d3a3e=['挑戦する確率を選んでください','5705180BkORkh','getElementById','kazu','challenge','getDate','ima','getSeconds','classList','getMonth','10628199jDSVfO','4776UJAATI','#app','show','30XmdwVZ','loading','clear','第1ステージで失敗','remove','kekka','setsumei','結果を','onload','90108tEZDRd','8LxjleL','8146136OdXQHx','FINALステージで失敗','ステージで失敗','mount','getHours','ritu','taku','5397BehxKr','getMilliseconds','Clear!!!!','%E3%80%8EMillion%E3%80%8F\x20完全制覇\x20','\x201/','rizaruto','twibun','Modal','createApp','750607OlwfzD','stage','10omOFJI','cmodal','kekka2','%E3%80%8EMillion%E3%80%8F\x20'];_0x175d=function(){return _0x3d3a3e;};return _0x175d();}
+const RenderHtmlApp = {
+    data() {
+        return {
+            load: false,
+            twibun: "https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&text=",
+            kekka2: "結果を",
+            rizaruto: "第1ステージで失敗",
+            clear: false,
+            stage: 0,
+            ritu: 1,
+            kekka: [false, false, false, false, false, false, false],
+            taku: [2, 2, 2, 5, 10, 25, 100],
+            setsumei: "挑戦する確率を選んでください",
+            challenge: false,
+            kazu: 0,
+            ima: 0,
+            ans: [],
+        }
+    },
+    methods: {
+        set(n) {
+            this.kazu = this.taku[n];
+            this.ima = n;
+            this.challenge = true;
+            this.setsumei = "当ててください、チャンスは1回のみです"
+        },
+        go(n) {
+            if (this.ans[this.stage] % this.kazu == n % this.kazu) {
+                this.kekka[this.ima] = true;
+                this.challenge = false;
+                this.setsumei = "挑戦する確率を選んでください";
+                this.ritu = this.ritu * this.kazu;
+                this.stage++;
+                if (this.stage > 6) {
+                    this.clear = true;
+                    this.rizaruto = "Clear!!!!";
+                    this.kekka2 = "クリア";
+                    this.twibun = this.twibun + "%E3%80%8EMillion%E3%80%8F 完全制覇 " + "1/" + this.ritu;
+                    theyModal.show();
+                }
+            } else {
+                this.rizaruto = "第" + (this.stage + 1) + "ステージで失敗";
+                if (this.stage == 6) {
+                    this.rizaruto = "FINALステージで失敗";
+                }
+                this.twibun = this.twibun + "%E3%80%8EMillion%E3%80%8F " + this.rizaruto + " 1/" + this.ritu;
+                theyModal.show();
+            }
+        },
+        reset(){
+            theyModal.hide();
+            this.twibun= "https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&text=";
+            this.kekka2 = "結果を";
+            this.rizaruto= "第1ステージで失敗";
+            this.clear= false;
+            this.stage= 0;
+            this.ritu= 1;
+            this.kekka= [false, false, false, false, false, false, false];
+            this.taku= [2, 2, 2, 5, 10, 25, 100];
+            this.setsumei= "挑戦する確率を選んでください";
+            this.challenge= false;
+            this.kazu= 0;
+            this.ima= 0;
+            let now = new Date();
+            this.ans = [now.getFullYear(), now.getMonth() + 1, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()];
+        }
+    },
+    mounted() {
+        window.onload = () => {
+            document.getElementById('loading').classList.remove("d-none");
+            this.reset();
+            this.load = true;
+        }
+    }
+};
+const app = Vue.createApp(RenderHtmlApp);
+
+const vm = app.mount('#app');
+
+const theyModal = new bootstrap.Modal(document.getElementById('cmodal'), {
+    keyboard: false
+});
+

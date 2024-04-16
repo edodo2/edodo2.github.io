@@ -50,7 +50,7 @@
             <div v-else>
               <p>残念！</p>
               <p>記録：1/{{ritu}}</p>
-              <button onclick="window.location.reload(true);" class="button">再挑戦</button>
+              <button @click="reset" class="button">再挑戦</button>
             </div>
             <a class="btn btn-primary btn-lg m-3" :href="twibun"
               href="https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&amp;text="
