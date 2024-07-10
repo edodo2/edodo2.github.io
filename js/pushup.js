@@ -30,6 +30,9 @@ const RenderHtmlApp = {
             }
         },
         start() {
+            // 開始時に全画面表示
+            document.documentElement.requestFullscreen();
+
             this.count = 5;
             setTimeout(this.down, 1000);
         },
@@ -50,15 +53,21 @@ const RenderHtmlApp = {
             this.now++;
             if (this.count < this.now) {
                 clearInterval(this.counter);
-                this.twibun = this.twibun + "エンドレス腕立て 記録:" + this.count + "回&hashtags=2秒毎腕立て"
+                this.twibun = this.twibun + "エンドレス腕立て 記録:" + this.count + "回&hashtags=2秒毎腕立て";
                 theyModal.show();
+
+                // カウント終了時に全画面表示を解除
+                document.exitFullscreen();
             } else {
                 this.addok = true;
             }
         },
         qu() {
-            this.twibun = this.twibun + "3分間腕立て 記録:" + this.count + "回&hashtags=3分間腕立て"
+            this.twibun = this.twibun + "3分間腕立て 記録:" + this.count + "回&hashtags=3分間腕立て";
             theyModal.show();
+
+            // カウント終了時に全画面表示を解除
+            document.exitFullscreen();
         }
     },
     mounted() {
