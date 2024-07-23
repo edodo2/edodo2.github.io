@@ -55,7 +55,7 @@
     <div class="h-100 text-center">
       <div class="row-cols-5 h-100">
         <button v-if="startF && !ans" class="btn btn-light fs-2" v-for="(item,index) in nums">{{item}}</button>
-        <button v-if="startF && ans" class="btn btn-outline-dark fs-2" v-for="(item,index) in nums" @click="push(index)">　</button>
+        <button v-if="startF && ans" :class="{ 'btn-primary disabled': count > item , 'btn-outline-dark': item >=count }" class="btn fs-2" v-for="(item,index) in nums" @click="push(index)">　</button>
       </div>
     </div>
     <div class="modal" id="endmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
