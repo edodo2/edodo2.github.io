@@ -52,7 +52,7 @@
     </div>
   </div>
   <div class="d-none h-100" id="loading">
-    <div class="h-100 text-center">
+    <div class="h-100 text-center pt-2">
       <div class="row-cols-5 h-100">
         <button v-if="startF && !ans" class="btn btn-light fs-2" v-for="(item,index) in nums">{{item}}</button>
         <button v-if="startF && ans" :class="{ 'btn-primary disabled': count > item , 'btn-outline-dark': item >=count }" class="btn fs-2" v-for="(item,index) in nums" @click="push(index)">　</button>
