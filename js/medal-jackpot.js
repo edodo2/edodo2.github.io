@@ -52,7 +52,6 @@ const ControlPanel = {
       <label class="form-label">Bet</label>
       <input type="number" min="1" :value="bet" @input="$emit('update-bet', $event.target.value)" class="form-control mb-2" />
       <button class="btn btn-primary" :disabled="isSpinning || credits<bet" @click="$emit('start')">スタート</button>
-      <button class="btn btn-secondary mt-2" @click="$emit('reset')">リセット</button>
     </div>
   `,
   computed: {
@@ -161,15 +160,6 @@ const App = {
     symbolToPath(sym) {
       if (!sym) return '../../image/medal-jackpot/blank.svg';
       return '../../image/medal-jackpot/' + sym + '.svg';
-    },
-    resetRound() {
-      this.stages.forEach(s => {
-        s.status = 'idle';
-        s.currentSymbol = 'blank';
-        s.resultSymbol = null;
-      });
-      this.result = { won: false, payout: 0, matchedStages: 0, symbols: [] };
-      this.ui.showResultModal = false;
     }
   },
   template: `
@@ -182,7 +172,7 @@ const App = {
         </div>
         <div class="col-4">
           <control-panel :credits="credits" :bet="bet" :isSpinning="isSpinning"
-            @start="startDraw" @reset="resetRound" @update-bet="val => { this.bet = Math.max(1, Number(val) || 1) }"></control-panel>
+            @start="startDraw" @update-bet="val => { this.bet = Math.max(1, Number(val) || 1) }"></control-panel>
           <odds-display :stages="stages"></odds-display>
         </div>
       </div>
