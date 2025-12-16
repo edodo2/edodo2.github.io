@@ -1,0 +1,20 @@
+.mj-container { }
+.mj-stages { gap: 1rem; }
+.mj-stage { width: 28%; }
+.mj-reel { background: #f8f9fa; border: 1px solid #ddd; padding: 1rem; border-radius: 6px; height:120px; display:flex; align-items:center; justify-content:center; }
+.mj-symbol { max-width:100px; max-height:100px; }
+.mj-controls { border-left: 1px solid #eee; padding-left:1rem; }
+.modal-backdrop { position:fixed; left:0; right:0; top:0; bottom:0; background: rgba(0,0,0,0.4); z-index:1050; }
+.modal-content { background:white; border-radius:6px; }
+
+.mj-stage-label { font-weight:600; margin-bottom:0.5rem; }
+.mj-stage--spinning .mj-reel { box-shadow: 0 0 12px rgba(0,123,255,0.15); }
+.mj-stage--stopped .mj-reel { transition: transform 260ms ease; }
+.mj-symbol { transition: transform 160ms ease; }
+.mj-reel img { display:block; }
+.mj-odds { font-size:0.95rem; }
+.mj-controls .btn { width:100%; }
+
+.mj-credits-visual { display:flex; gap:4px; align-items:center; flex-wrap:wrap; }
+.coin-icon { width:22px; height:22px; }
+.result-summary .card { border-radius:8px; }
