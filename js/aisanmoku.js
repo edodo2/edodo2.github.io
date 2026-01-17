@@ -2,6 +2,7 @@ const twtx = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebu
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             twibun: "",
             load: false,
             gakushunum: 0,
@@ -24,6 +25,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         ton(n, m) {
             this.kioku.push({ n, m });
             let val = [];

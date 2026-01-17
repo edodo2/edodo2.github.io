@@ -6,6 +6,7 @@ const tango = ["異常", "山口", "出先", "異界", "岐阜", "茨城", "長�
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             twibun: base,
             load: false,
             time: 0,
@@ -17,6 +18,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         setup() {
             this.nums = [];
             this.go = Math.random() < 0.5;

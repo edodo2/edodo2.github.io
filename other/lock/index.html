@@ -26,6 +26,37 @@
 </head>
 
 <body id="lockapp" style="height:100dvh">
+  <!-- Landing Page -->
+  <div :class="{'d-none': gameStarted}">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../../" class="nav-link">謎</a></li>
+        <li class="nav-item"><a href="../../other/" class="nav-link">謎以外</a></li>
+        <li class="nav-item"><a href="../../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+      </ul>
+    </header>
+    <div class="container">
+      <h1 class="text-center">ロック解除ゲーム</h1>
+      <p>30秒間とにかくロックを解除してください。ブラウザで動作します。</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">伝達事項</h5>
+          <li>スタートするとカウントダウンの後、始まります</li>
+          <li>クリック判定がシビアなのも楽しんでいただけると幸いです</li>
+          <li>スライドしたりするとクリックじゃないことになるよ</li>
+          <li>とにかく解除してください</li>
+          <li>後日気が向いた場合にカオスモードが実装されます</li>
+        </div>
+      </div>
+      <div class="d-grid m-2">
+        <button class="btn btn-primary btn-lg m-2" @click="startGame">Start</button>
+        <a class="btn btn-primary btn-sm m-2" href="https://twitter.com/intent/tweet?hashtags=Lock_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8E%E3%83%AD%E3%83%83%E3%82%AF%E8%A7%A3%E9%99%A4%E3%82%B2%E3%83%BC%E3%83%A0%E3%80%8F%20%E6%8C%91%E6%88%A6%E3%81%97%E3%81%BE%E3%81%99&amp;url=https%3A%2F%2Fedodo2.github.io%2Fother%2Flock%2F" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path></svg>挑戦開始ツイートする</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Page -->
+  <div :class="{'d-none': !gameStarted}" style="height:100dvh">
   <div v-if="!load">
     なうろーでぃんぐ
   </div>
@@ -108,6 +139,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   <script src="../../js/bootstrap.bundle.js"></script>
   <script src="../../js/vue.global.prod.js"></script>

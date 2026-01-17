@@ -1,6 +1,7 @@
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             load: false,
             twibun: "https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&text=",
             kekka2: "結果を",
@@ -18,6 +19,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         set(n) {
             this.kazu = this.taku[n];
             this.ima = n;
@@ -67,7 +71,6 @@ const RenderHtmlApp = {
     },
     mounted() {
         window.onload = () => {
-            document.getElementById('loading').classList.remove("d-none");
             this.reset();
             this.load = true;
         }

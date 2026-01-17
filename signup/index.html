@@ -25,7 +25,36 @@
     <title>Signup</title>
 </head>
 
-<body id="signup">
+<body id="signup" style="height:100dvh">
+    <!-- Landing Page -->
+    <div :class="{'d-none': gameStarted}">
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="../" class="nav-link">謎</a></li>
+                <li class="nav-item"><a href="../other/" class="nav-link">謎以外</a></li>
+                <li class="nav-item"><a href="../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+            </ul>
+        </header>
+        <div class="container">
+            <h1 class="text-center">Web謎『Signup』</h1>
+            <p>一発ネタ</p>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">伝達事項</h5>
+                    <li>ソースコード見る必要なし</li>
+                    <li>クリアポストボタンが出たらクリア</li>
+                    <li>なうろーでぃんぐは読み込み中</li>
+                </div>
+            </div>
+            <div class="d-grid m-2">
+                <button class="btn btn-primary btn-lg m-2" @click="startGame">Start</button>
+                <a class="btn btn-dark btn-sm m-2" href="https://twitter.com/intent/tweet?hashtags=Signup_edodo2&amp;ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&amp;text=Web%E8%AC%8E%E3%80%8ESignup%E3%80%8F%20挑戦します&amp;url=https%3A%2F%2Fedodo2.github.io%2Fsignup%2F" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" /></svg>挑戦開始ポストする</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Page -->
+    <div :class="{'d-none': !gameStarted}">
     <div v-if="!load">
         なうろーでぃんぐ
     </div>

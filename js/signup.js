@@ -1,6 +1,7 @@
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             load: false,
             count: 0,
             pass: "",
@@ -8,6 +9,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         start() {
             modal.show();
         },

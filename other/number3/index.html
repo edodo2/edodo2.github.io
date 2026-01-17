@@ -29,39 +29,69 @@
 </head>
 
 <body id="number3" style="height:100dvh">
-  <div v-if="!load">
-    なうろーでぃんぐ
-  </div>
-  <div class="d-none h-100" id="loading">
-    <div class="h-25">
-      <div class="h-50"></div>
-      <h1 class="h-50 text-center">next: {{now}}</h1>
-    </div>
-    <div class="h-50 text-center">
-      <div class="row-cols-4 h-100">
-        <button class="h-25 btn btn-light fs-2" v-for="(item,index) in nums" @mousedown="push(index)"
-          @touchstart="push(index)">{{item}}</button>
+  <!-- Landing Page -->
+  <div :class="{'d-none': gameStarted}">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../../" class="nav-link">謎</a></li>
+        <li class="nav-item"><a href="../../other/" class="nav-link">謎以外</a></li>
+        <li class="nav-item"><a href="../../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+      </ul>
+    </header>
+    <div class="container">
+      <h1 class="text-center">1から順に押すやつエンドレス</h1>
+      <p class="text-center">1から30まで押すやつの姉妹コンテンツ2です。</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">説明</h5>
+          <ul>
+            <li>制限時間は1秒です</li>
+            <li>1つ押すごとに制限時間+1秒</li>
+            <li>唐突に始まります</li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-grid m-2">
+        <button class="btn btn-primary btn-lg m-2" @click="startGame">Start</button>
       </div>
     </div>
-    <div class="h-50 text-center">{{time}}ms</div>
-    <div class="h-25"></div>
-    <div class="modal" id="endmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content container">
-          <div class="modal-header">
-            <h5 class="modal-title">{{now}}秒耐えた</h5>
-          </div>
-          <div class="modal-body">
-            <a class="btn btn-dark btn-lg m-3" :href="twibun" tabindex="-1" id="b" target="_blank"
-              rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-                <path
-                  d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
-              </svg> ポストする</a>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" @click="reset()">リトライ</button>
-          </div>
+  </div>
+
+  <!-- Game Page -->
+  <div :class="{'d-none': !gameStarted}" style="height:100dvh">
+    <div v-if="!load">
+      なうろーでぃんぐ
+    </div>
+    <div class="d-none h-100" id="loading">
+      <div class="h-25">
+        <div class="h-50"></div>
+        <h1 class="h-50 text-center">next: {{now}}</h1>
+      </div>
+      <div class="h-50 text-center">
+        <div class="row-cols-4 h-100">
+          <button class="h-25 btn btn-light fs-2" v-for="(item,index) in nums" @mousedown="push(index)"
+            @touchstart="push(index)">{{item}}</button>
+        </div>
+      </div>
+      <div class="h-50 text-center">{{time}}ms</div>
+      <div class="h-25"></div>
+      <div class="modal" id="endmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content container">
+            <div class="modal-header">
+              <h5 class="modal-title">{{now}}秒耐えた</h5>
+            </div>
+            <div class="modal-body">
+              <a class="btn btn-dark btn-lg m-3" :href="twibun" tabindex="-1" id="b" target="_blank"
+                rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                  <path
+                    d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+                  </svg> ポストする</a>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" @click="reset()">リトライ</button>
+            </div>
         </div>
       </div>
     </div>

@@ -1,49 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-B83MV7YCDW');
-  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="メダルジャックポットのスタートページ。遊び方と賭けのルール、注意点を記載しています。">
-  <meta property="og:title" content="メダルジャックポット - Start">
-  <meta property="og:description" content="メダルジャックポットのスタートページ。遊び方と賭けのルール、注意点を記載しています。">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"メダルジャックポット Start","description":"メダルジャックポットのスタートページ。遊び方と賭けのルール、注意点を記載しています。"}</script>
   <title>メダルジャックポット - Start</title>
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../css/medal-jackpot.css">
-</head>
-<body>
-  <div class="container py-4">
-    <h1 class="mb-3">メダルジャックポット</h1>
-    <div class="d-grid gap-2 mb-3">
-      <a class="btn btn-outline-primary btn-sm" href="./guide.html" role="button">📖 ゲームガイドを読む</a>
-    </div>
-    <div class="mb-2 d-flex justify-content-end">
-      <a id="share-x" class="btn btn-outline-secondary btn-sm me-2" target="_blank" rel="noopener">Xへ投稿</a>
-      <a href="../" class="btn btn-link btn-sm text-muted">その他ゲーム一覧に戻る</a>
-    </div>
-    <div id="medal-jackpot-app"></div>
-  </div>
-
-  <script src="../../js/vue.global.prod.js"></script>
-  <script src="../../js/medal-jackpot.js"></script>
   <script>
-    // Set initial share text to show 100pt and this page URL with the game hashtag
-    (function(){
-      const btn = document.getElementById('share-x');
-      if (!btn) return;
-      const creditsInitial = 100;
-      const url = location.href;
-      const text = `${creditsInitial}pt ${url} #メダルジャックポット_edodo2`;
-      btn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
-    })();
+    window.location.href = './';
   </script>
-</body>
-</html>
+</head>
+<body></body>

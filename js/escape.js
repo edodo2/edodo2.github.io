@@ -3,6 +3,7 @@ const regexp = /\+$|-$|\*$/;
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             load: false,
             now: 0,
             text: "",
@@ -28,6 +29,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         move(n) {
             this.base();
             this.now += n;
@@ -423,7 +427,6 @@ const RenderHtmlApp = {
     },
     mounted() {
         window.onload = () => {
-            document.getElementById('loading').classList.remove("d-none");
             this.load = true;
         };
     }

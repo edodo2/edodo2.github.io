@@ -1,6 +1,7 @@
 const RenderHtmlApp = {
   data() {
     return {
+      gameStarted: false,
       map: "□□□□□□□□□□□□□□□□□□□□□□□",
       n: 1,
       now: -1,
@@ -12,6 +13,9 @@ const RenderHtmlApp = {
     }
   },
   methods: {
+    startGame() {
+      this.gameStarted = true;
+    },
     ca() {
       if (this.editting && this.moCheck) {
         theyModal.show();

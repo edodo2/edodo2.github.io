@@ -11,17 +11,52 @@
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="メダルジャックポット：所持ポイントを賭けるギャンブルゲーム。ルール・操作・配当をこのページで確認できます。">
+  <meta name="description" content="メダルジャックポット：所持ポイントを増やそうと頑張るゲーム。">
   <meta property="og:title" content="メダルジャックポット">
-  <meta property="og:description" content="メダルジャックポット：所持ポイントを賭けるギャンブルゲーム。ルール・操作・配当をこのページで確認できます。">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Game","name":"メダルジャックポット","description":"メダルジャックポット：所持ポイントを賭けるギャンブルゲーム。ルール・操作・配当をこのページで確認できます。"}</script>
+  <meta property="og:description" content="メダルジャックポット：所持ポイントを増やそうと頑張るゲーム。">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Game","name":"メダルジャックポット","description":"メダルジャックポット：所持ポイントを増やそうと頑張るゲーム。"}</script>
   <title>メダルジャックポット</title>
   <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/medal-jackpot.css">
 </head>
 <body>
-  <div class="container py-4">
-    <h1>メダルジャックポット</h1>
-    <p><a href="start.html" class="btn btn-primary">ゲームを始める</a></p>
+  <!-- Landing Page -->
+  <div :class="{'d-none': gameStarted}" class="container py-4">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../../" class="nav-link">謎</a></li>
+        <li class="nav-item"><a href="../../other/" class="nav-link">謎以外</a></li>
+        <li class="nav-item"><a href="../../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+      </ul>
+    </header>
+    <div class="container">
+      <h1 class="text-center">メダルジャックポット</h1>
+      <p class="text-center">所持ポイントを増やそうと頑張るゲーム。</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">伝達事項</h5>
+          <ul>
+            <li>運ゲーです</li>
+            <li>0になったらリロードするしかないです</li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-grid m-2">
+        <a class="btn btn-outline-secondary btn-sm m-2" href="./guide.html" role="button">📖 ゲームガイドを読む</a>
+      </div>
+    </div>
   </div>
+
+  <!-- Game Page -->
+  <div :class="{'d-none': !gameStarted}">
+    <div class="container py-4">
+      <div id="medal-jackpot-app"></div>
+    </div>
+  </div>
+
+  <script src="../../js/vue.global.prod.js"></script>
+  <script src="../../js/medal-jackpot.js"></script>
 </body>
 </html>
+
+

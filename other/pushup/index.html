@@ -29,31 +29,75 @@
 </head>
 
 <body id="pushapp" style="height:100dvh">
-  <div v-if="!load">
-    なうろーでぃんぐ
-  </div>
-  <div class="m-1 d-none h-100" id="loading">
-    <div class="card h-100 text-center" :class="{'bg-danger':addok}" @touchend="add">
-      <h1>{{count}}</h1>
+  <!-- Landing Page -->
+  <div :class="{'d-none': gameStarted}">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../../" class="nav-link">謎</a></li>
+        <li class="nav-item"><a href="../../other/" class="nav-link">謎以外</a></li>
+        <li class="nav-item"><a href="../../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+      </ul>
+    </header>
+    <div class="container">
+      <h1 class="text-center">腕立て伏せカウンター</h1>
+      <p class="text-center">タッチパネル専用です。謎解き要素は1つもありません。ブラウザで動作します。</p>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">説明</h5>
+          <ul>
+            <li>タッチパネル専用です</li>
+            <li>startをタッチするとカウントダウンの後、測定開始</li>
+            <li>顎で画面をタッチすることでカウントアップ</li>
+            <li>エンドレスモード</li>
+            <ul>
+              <li>画面が赤くなったら腕立て</li>
+              <li>赤くなってから2秒以内にカウントが増えなかったら終了</li>
+            </ul>
+            <li>3分間モード</li>
+            <ul>
+              <li>3分間とにかく腕立て</li>
+              <li>3分経過で終了</li>
+              <li>経過時間は表示しないので、とにかく腕立て伏せしてください</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="d-grid m-2">
+        <button class="btn btn-primary btn-lg m-2" @click="startGame(false)">エンドレスモード(2秒に1回)</button>
+        <button class="btn btn-primary btn-lg m-2" @click="startGame(true)">3分間モード</button>
+        <a class="btn btn-outline-secondary btn-sm m-2" href="./guide.html" role="button">📖 ゲームガイドを読む</a>
+      </div>
     </div>
+  </div>
 
-    <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-fullscreen h-100">
-        <div class="modal-content container">
-          <div class="modal-header">
-            <h5 class="modal-title">記録:{{count}}回</h5>
-          </div>
-          <div class="modal-body">
-            <p>お疲れさまでした！</p>
-            <p>また是非！</p>
-            <a class="btn btn-primary btn-lg m-3" :href="twibun" tabindex="-1" id="b" target="_blank"
-              rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                <path
-                  d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
-                </path>
-              </svg>ツイートする</a>
-            <p><a href="../../" target="_blank" rel="noopener noreferrer">サイトトップページへ</a></p>
+  <!-- Game Page -->
+  <div :class="{'d-none': !gameStarted}" style="height:100dvh">
+    <div v-if="!load">
+      なうろーでぃんぐ
+    </div>
+    <div class="m-1 d-none h-100" id="loading">
+      <div class="card h-100 text-center" :class="{'bg-danger':addok}" @touchend="add">
+        <h1>{{count}}</h1>
+      </div>
+
+      <div class="modal" id="cmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen h-100">
+          <div class="modal-content container">
+            <div class="modal-header">
+              <h5 class="modal-title">記録:{{count}}回</h5>
+            </div>
+            <div class="modal-body">
+              <p>お疲れさまでした！</p>
+              <p>また是非！</p>
+              <a class="btn btn-primary btn-lg m-3" :href="twibun" tabindex="-1" id="b" target="_blank"
+                rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                  fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                  <path
+                    d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                  </path>
+                </svg>ツイートする</a>
+              <p><a href="../../" target="_blank" rel="noopener noreferrer">サイトトップページへ</a></p>
+            </div>
           </div>
         </div>
       </div>

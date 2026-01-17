@@ -4,6 +4,7 @@ const base = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebu
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             twibun: base,
             load: false,
             score: 0,
@@ -15,6 +16,9 @@ const RenderHtmlApp = {
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        },
         setup() {
             let numslength = 0;
             while (numslength < 16) {

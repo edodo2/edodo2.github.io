@@ -3,10 +3,14 @@ import counter from "./counter.js";
 const RenderHtmlApp = {
     data() {
         return {
+            gameStarted: false,
             count : []
         }
     },
     methods: {
+        startGame() {
+            this.gameStarted = true;
+        }
     },
     mounted() {
 

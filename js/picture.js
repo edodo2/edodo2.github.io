@@ -6,6 +6,7 @@ let noC = false;
 const RenderHtmlApp = {
   data() {
     return {
+      gameStarted: false,
       editting: false,
       erace: false,
       hamme: false,
@@ -25,6 +26,9 @@ const RenderHtmlApp = {
     }
   },
   methods: {
+    startGame() {
+      this.gameStarted = true;
+    },
     edit() {
       this.editting = !this.editting;
       editting = this.editting;

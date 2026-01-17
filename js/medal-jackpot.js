@@ -75,6 +75,7 @@ const App = {
   components: { StageReel, ResultModal, ControlPanel, OddsDisplay },
   data() {
     return {
+      gameStarted: false,
       credits: 100,
       bet: 1,
       isSpinning: false,
@@ -88,6 +89,9 @@ const App = {
     };
   },
   methods: {
+    startGame() {
+      this.gameStarted = true;
+    },
     async startDraw() {
       if (this.isSpinning) return;
       if (this.credits < this.bet) return alert('クレジットが足りません');

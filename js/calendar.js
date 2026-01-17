@@ -1,6 +1,7 @@
 const RenderHtmlApp = {
   data() {
     return {
+      gameStarted: false,
       load: false,
       width: window.innerWidth,
       height: window.innerHeight,
@@ -31,6 +32,9 @@ const RenderHtmlApp = {
     }
   },
   methods: {
+    startGame() {
+      this.gameStarted = true;
+    },
     cal() {
       this.home = false;
       this.calendar = true;
