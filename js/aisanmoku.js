@@ -1,4 +1,4 @@
-const twtx = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Faisanmoku%2Fstart.html&hashtags=AIさんもく_edodo2&text=";
+const twtx = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Faisanmoku%2F&hashtags=AIさんもく_edodo2&text=";
 const RenderHtmlApp = {
     data() {
         return {

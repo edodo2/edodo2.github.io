@@ -3,7 +3,7 @@ const RenderHtmlApp = {
     data() {
         return {
             load: false,
-            twibun: "https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2Fstart.html&text=",
+            twibun: "https://twitter.com/intent/tweet?hashtags=Million_edodo2_April_Fool&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fmillion%2F&text=",
             kekka2: "結果を",
             rizaruto: "第1ステージで失敗",
             clear: false,

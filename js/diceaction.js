@@ -4,7 +4,7 @@ const RenderHtmlApp = {
     data() {
         return {
             gameStarted: false,
-            twibun: "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fdiceaction%2Fstart.html&hashtags=チンチロ_edodo2&text=",
+            twibun: "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fdiceaction%2F&hashtags=チンチロ_edodo2&text=",
             load: false,
             dice: [1, 1, 1],
             dis: [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
@@ -272,7 +272,7 @@ const RenderHtmlApp = {
             }
         },
         reset() {
-            this.twibun = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fdiceaction%2Fstart.html&hashtags=チンチロ_edodo2&text=";
+            this.twibun = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fdiceaction%2F&hashtags=チンチロ_edodo2&text=";
             this.dice = [1, 1, 1];
             this.dis = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
             this.points = [50000, 50000, 50000, 50000];

@@ -1,5 +1,5 @@
 
-const base = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fhachiban%2Fstart.html&hashtags=出口_edodo2&text=";
+const base = "https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&url=https%3A%2F%2Fedodo2.github.io%2Fother%2Fhachiban%2F&hashtags=出口_edodo2&text=";
 const ihen = "異変";
 const deguchi = "出口";
 const tango = ["異常", "山口", "出先", "異界", "岐阜", "茨城", "長野", "兵庫", "入口", "味方", "出国", "改変", "畏怖", "秋田", "田園", "谷口", "青森", "岩手", "理性"];
