@@ -306,7 +306,7 @@ const RenderHtmlApp = {
                 return;
             }
 
-            let nanika = this.gakushunum > 99999 ? 20000 :this.gakushunum > 9999 ? 10000 : this.gakushunum > 100 ? 1000 : this.gakushunum > 10 ? 100 : this.gakushunum > 1 ? 10 : 1;
+            let nanika = this.gakushunum > 10000 ? 100000 :this.gakushunum > 1000 ? 10000 : this.gakushunum > 100 ? 1000 : this.gakushunum > 10 ? 100 : this.gakushunum > 1 ? 10 : 1;
             // nanika = 1000000;
             if (this.gakushunum % 100 == 0 || this.gakushunum % nanika == 0) {
                 if (this.gakushunum % nanika == 0) {
@@ -358,7 +358,7 @@ const RenderHtmlApp = {
             }
 
             this.xnou.forEach((value, key) => {
-                if (this.keiwa(value) < 100) {
+                if (this.keiwa(value) < 100000) {
                     return;
                 }
                 let val = [];
@@ -366,7 +366,7 @@ const RenderHtmlApp = {
                     let inval = [];
                     for (j = 0; j < 3; j++) {
                         if (value[i][j] != "X") {
-                            inval.push(Math.floor(value[i][j] * 0.49) + 1)
+                            inval.push(Math.floor(value[i][j] * 0.1) + 1)
                         } else {
                             inval.push("X");
                         }
