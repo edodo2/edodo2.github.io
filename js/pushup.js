@@ -59,7 +59,7 @@ const RenderHtmlApp = {
             this.now++;
             if (this.count < this.now) {
                 clearInterval(this.counter);
-                this.twibun = this.twibun + "エンドレス腕立て 記録:" + this.count + "回&hashtags=2秒毎腕立て";
+                this.twibun = this.twibun + "エンドレス腕立て 記録:" + this.count + "回&hashtags=" + encodeURIComponent("2秒毎腕立て");
                 theyModal.show();
 
                 // カウント終了時に全画面表示を解除
@@ -69,7 +69,7 @@ const RenderHtmlApp = {
             }
         },
         qu() {
-            this.twibun = this.twibun + "3分間腕立て 記録:" + this.count + "回&hashtags=3分間腕立て";
+            this.twibun = this.twibun + "3分間腕立て 記録:" + this.count + "回&hashtags=" + encodeURIComponent("3分間腕立て");
             theyModal.show();
 
             // カウント終了時に全画面表示を解除

@@ -59,7 +59,7 @@ const RenderHtmlApp = {
             }
         },
         end() {
-            this.twibun = this.twibun + "30秒もあれば " + this.count + " 回ロック解除できます&hashtags=ロック解除ゲーム"
+            this.twibun = this.twibun + "30秒もあれば " + this.count + " 回ロック解除できます&hashtags=" + encodeURIComponent("ロック解除ゲーム")
             theyModal.show();
         }
     },
