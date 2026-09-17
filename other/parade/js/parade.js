@@ -42,7 +42,7 @@ const RenderHtmlApp = {
             }
         },
         end() {
-            this.twibun = base + "Score:" + this.score;
+            this.twibun = base + encodeURIComponent("Score:" + this.score + " #行進_edodo2");
             modal.show();
         },
         reset() {

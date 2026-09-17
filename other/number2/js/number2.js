@@ -62,7 +62,7 @@ const RenderHtmlApp = {
         end() {
             clearInterval(this.timer);
             this.timer = null;
-            this.twibun = base + "N=" + (this.now - 1);
+            this.twibun = base + encodeURIComponent("N=" + (this.now - 1) + " #1からNまで押せたね_edodo2");
             modal.show();
         },
         reset() {

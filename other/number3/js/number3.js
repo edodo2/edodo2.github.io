@@ -62,7 +62,7 @@ const RenderHtmlApp = {
         end() {
             clearInterval(this.timer);
             this.timer = null;
-            this.twibun = base + "" + (this.now) + "秒耐えた";
+            this.twibun = base + encodeURIComponent((this.now) + "秒耐えた #1から順に押すやつエンドレス_edodo2");
             modal.show();
         },
         reset() {
