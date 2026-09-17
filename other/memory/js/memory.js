@@ -65,7 +65,7 @@ const RenderHtmlApp = {
             this.ans = true;
         },
         end() {
-            this.twibun = base + "記録:" + (this.now - 1);
+            this.twibun = base + encodeURIComponent("記録:" + (this.now - 1) + " #覚えて押すやつ_edodo2");
             modal.show();
         },
         reset() {
