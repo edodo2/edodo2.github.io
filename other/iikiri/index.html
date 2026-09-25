@@ -63,9 +63,6 @@
           <div class="display-4 fw-bold text-danger my-3 word-break">
             『 {{ resultText }} 』！！
           </div>
-          <div class="text-secondary small mt-2">
-            （ハッシュ: A={{ hashA }}, B={{ hashB }} / 差={{ diff }} [{{ isEven ? '偶数→大きい方' : '奇数→小さい方' }}]）
-          </div>
           <div class="mt-4">
             <a class="btn btn-primary" :href="twibun" target="_blank" rel="noopener noreferrer">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter me-1" viewBox="0 0 16 16">
@@ -79,7 +76,7 @@
         <div class="card p-3 bg-body-tertiary">
           <h5 class="card-title fs-6 fw-bold">言い切り君のルール</h5>
           <p class="card-text small text-muted mb-0">
-            2つの文字列を固定ハッシュで数値化し、その差が<b>偶数</b>のときは値の<b>大きい方</b>、<b>奇数</b>のときは値の<b>小さい方</b>を採用します。同じ組み合わせであれば常に同じ結果が選ばれます。
+            2つの文字列から1つを力強く言い切ります。同じ組み合わせの比較では常に同じ結果が選ばれます。
           </p>
         </div>
       </div>
