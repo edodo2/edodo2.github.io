@@ -72,7 +72,7 @@ const RenderHtmlApp = {
             this.resultText = res.adopted;
             this.hasResult = true;
 
-            const shareText = "言い切り君で「" + this.textA + "」と「" + this.textB + "」を比較した結果、「" + this.resultText + "」に決定しました！ #言い切り君 #edodo2";
+            const shareText = "言い切り君で「" + this.textA + "」と「" + this.textB + "」を比較した結果、「" + this.resultText + "」！ #言い切り君 #edodo2";
             const shareHashtags = "言い切り君,edodo2";
             const shareUrl = "https://edodo2.github.io/other/iikiri/";
             this.twibun = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText) + "&hashtags=" + encodeURIComponent(shareHashtags) + "&url=" + encodeURIComponent(shareUrl);
