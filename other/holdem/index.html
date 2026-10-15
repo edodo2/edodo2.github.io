@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B83MV7YCDW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-B83MV7YCDW');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7932237784497010"
+    crossorigin="anonymous"></script>
+  <!-- Google end -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <meta name="description" content="テキサスホールデム勝敗予想：ヘッズアップで自分の手札2枚から勝敗を予想するゲーム。引き分け的中なら連勝数2倍！">
+  <meta property="og:title" content="テキサスホールデム勝敗予想">
+  <meta property="og:description" content="テキサスホールデム勝敗予想：ヘッズアップで自分の手札2枚から勝敗を予想するゲーム。引き分け的中なら連勝数2倍！">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Game","name":"テキサスホールデム勝敗予想","description":"テキサスホールデム勝敗予想：ヘッズアップで自分の手札2枚から勝敗を予想するゲーム。引き分け的中なら連勝数2倍！"}</script>
+  <title>テキサスホールデム勝敗予想</title>
+  <style>
+    .poker-card {
+      width: 58px;
+      height: 84px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px;
+      font-weight: bold;
+      user-select: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .poker-card.card-hidden {
+      background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+      border-color: #1a252f;
+      color: #fff;
+      justify-content: center;
+    }
+    .poker-card .suit-symbol {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .poker-card .rank-label {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .text-suit-red {
+      color: #dc3545;
+    }
+    .text-suit-black {
+      color: #212529;
+    }
+  </style>
+</head>
+
+<body id="holdem">
+  <div class="container mb-5">
+    <header class="d-flex justify-content-center py-3 mb-4 border-bottom">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="../../" class="nav-link">謎</a></li>
+        <li class="nav-item"><a href="../../other/" class="nav-link">謎以外</a></li>
+        <li class="nav-item"><a href="../../privacy-policy/" class="nav-link">プライバシーポリシー</a></li>
+      </ul>
+    </header>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <h1 class="text-center mb-3">テキサスホールデム勝敗予想</h1>
+        <p class="text-muted text-center mb-4">
+          自分の手札2枚だけを見て、ボード・相手の手札を含めた勝敗を予想しよう！<br>
+          正解で連勝数+1！ 見事<strong>引き分け</strong>を当てると<strong>連勝数2倍</strong>！
+        </p>
+
+        <!-- Streak Counter -->
+        <div class="card shadow-sm mb-4 text-center p-3 bg-light">
+          <div class="row align-items-center">
+            <div class="col-6 border-end">
+              <div class="small text-muted fw-bold">現在の連勝数</div>
+              <div class="display-5 text-primary fw-bold">{{ currentStreak }}</div>
+            </div>
+            <div class="col-6">
+              <div class="small text-muted fw-bold">最高連勝数</div>
+              <div class="display-6 text-secondary fw-bold">{{ maxStreak }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="card shadow-sm p-3 mb-4">
+
+          <!-- Villain Hand -->
+          <div class="mb-4 text-center">
+            <div class="fw-bold mb-2">相手の手札 (Villain)</div>
+            <div class="d-flex justify-content-center gap-2">
+              <template v-if="phase === 'guessing'">
+                <div class="poker-card card-hidden">
+                  <span class="fs-4">♠</span>
+                </div>
+                <div class="poker-card card-hidden">
+                  <span class="fs-4">♥</span>
+                </div>
+              </template>
+              <template v-else>
+                <div v-for="(card, idx) in villainCards" :key="'villain-'+idx"
+                  class="poker-card" :class="card.isRed ? 'text-suit-red' : 'text-suit-black'">
+                  <div class="rank-label align-self-start">{{ card.rankName }}</div>
+                  <div class="suit-symbol">{{ card.symbol }}</div>
+                  <div class="rank-label align-self-end">{{ card.rankName }}</div>
+                </div>
+              </template>
+            </div>
+            <div v-if="phase === 'revealed' && villainEval" class="small text-muted mt-1 fw-bold">
+              役: {{ villainEval.desc }}
+            </div>
+          </div>
+
+          <!-- Board Cards -->
+          <div class="mb-4 text-center p-3 rounded bg-body-tertiary">
+            <div class="fw-bold mb-2">コミュニティカード (ボード5枚)</div>
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+              <template v-if="phase === 'guessing'">
+                <div v-for="n in 5" :key="'board-hidden-'+n" class="poker-card card-hidden">
+                  <span class="fs-5">?</span>
+                </div>
+              </template>
+              <template v-else>
+                <div v-for="(card, idx) in boardCards" :key="'board-'+idx"
+                  class="poker-card" :class="card.isRed ? 'text-suit-red' : 'text-suit-black'">
+                  <div class="rank-label align-self-start">{{ card.rankName }}</div>
+                  <div class="suit-symbol">{{ card.symbol }}</div>
+                  <div class="rank-label align-self-end">{{ card.rankName }}</div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Hero Hand -->
+          <div class="mb-4 text-center">
+            <div class="fw-bold mb-2 text-primary">自分の手札 (Hero)</div>
+            <div class="d-flex justify-content-center gap-2">
+              <div v-for="(card, idx) in heroCards" :key="'hero-'+idx"
+                class="poker-card" :class="card.isRed ? 'text-suit-red' : 'text-suit-black'">
+                <div class="rank-label align-self-start">{{ card.rankName }}</div>
+                <div class="suit-symbol">{{ card.symbol }}</div>
+                <div class="rank-label align-self-end">{{ card.rankName }}</div>
+              </div>
+            </div>
+            <div v-if="phase === 'revealed' && heroEval" class="small text-primary mt-1 fw-bold">
+              役: {{ heroEval.desc }}
+            </div>
+          </div>
+
+          <!-- Controls (Guess Buttons) -->
+          <div v-if="phase === 'guessing'" class="mt-2">
+            <label class="form-label fw-bold d-block text-center mb-2">勝敗予想を選択してください</label>
+            <div class="row g-2">
+              <div class="col-4">
+                <button class="btn btn-success btn-lg w-100 fw-bold" @click="makeGuess('win')">
+                  勝ち
+                </button>
+              </div>
+              <div class="col-4">
+                <button class="btn btn-warning btn-lg w-100 fw-bold text-dark" @click="makeGuess('tie')">
+                  引き分け<br><small class="fs-7">(連勝2倍)</small>
+                </button>
+              </div>
+              <div class="col-4">
+                <button class="btn btn-danger btn-lg w-100 fw-bold" @click="makeGuess('loss')">
+                  負け
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Display -->
+          <div v-if="phase === 'revealed'" class="mt-3 text-center">
+            <div class="alert p-3" :class="isCorrect ? 'alert-success' : 'alert-danger'">
+              <h4 class="alert-heading fw-bold mb-2">{{ isCorrect ? '🎉 正解！' : '❌ 残念！' }}</h4>
+              <p class="mb-0 fs-5 fw-bold">{{ resultMessage }}</p>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-primary btn-lg fw-bold" @click="deal">
+                次のゲームへ
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tweet Button -->
+        <div class="text-center mb-4">
+          <a class="btn btn-primary btn-lg" :href="twibun" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-twitter me-2" viewBox="0 0 16 16">
+              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+            </svg>
+            結果をXで自慢する
+          </a>
+        </div>
+
+        <!-- Rules Explanation -->
+        <div class="card p-3 bg-body-tertiary">
+          <h5 class="card-title fs-6 fw-bold">ゲームルール</h5>
+          <ul class="card-text small text-muted mb-0 ps-3">
+            <li>52枚のカードからランダムに、自分の手札2枚・相手の手札2枚・共通ボード5枚の計9枚が配られます。</li>
+            <li>あなたは自分の手札2枚だけを見て、「勝ち」「負け」「引き分け」のいずれかを予想します。</li>
+            <li>予想選択後、ボード5枚と相手の手札が公開され、それぞれの7枚から最強の5枚で作られるポーカー役を比較します。</li>
+            <li>「勝ち」「負け」を当てると連勝数が+1されます。</li>
+            <li>「引き分け」を見事当てると、これまでの連勝数が<strong>2倍</strong>になります！(0連勝の場合は1になります)</li>
+            <li>予想を外すと連勝数は0にリセットされます。最高連勝数を目指しましょう！</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/bootstrap.bundle.js"></script>
+  <script src="../../js/vue.global.prod.js"></script>
+  <script src="../../js/holdem.js"></script>
+</body>
+
+</html>
